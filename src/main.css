@@ -6,6 +6,9 @@
   body {
     @apply font-sans;
   }
+  textarea {
+    @apply resize-y;
+  }
 }
 
 @layer components {
@@ -40,13 +43,13 @@
     @apply flex justify-center py-4 mb-6 w-full text-xl font-bold text-C_blue-600 bg-C_blue-100 hover:bg-[#E0F1FF] rounded border border-C_blue-300;
   }
   .nowside-input {
-    @apply w-full tracking-wide text-C_blue-600 dark:text-C_blue-200 bg-C_gray-100 dark:bg-[#333333] rounded border border-C_gray-300 dark:border-C_gray-900 focus:border-C_green-500 focus:ring-C_green-500 form-input;
+    @apply w-full tracking-wide text-C_blue-600 dark:text-C_blue-200 bg-C_gray-100 dark:bg-[#333333] rounded border-2 border-C_gray-300 dark:border-C_gray-900 focus:ring-2 focus:border-C_green-500 focus:ring-C_green-500 form-input;
   }
   .nowside-checkbox {
     @apply mr-2 checked:bg-C_green-500 checked:hover:bg-C_green-500 checked:focus:bg-C_green-500 rounded-[4px] border-C_gray-700 focus:ring-C_green-500 form-checkbox;
   }
   .nowside-textarea {
-    @apply p-2 w-full tracking-wide text-C_blue-600 dark:text-C_blue-200 bg-C_gray-100 dark:bg-[#333333] rounded border-2 border-C_gray-300 dark:border-C_gray-900 focus:border-C_green-500 focus:outline-none focus:ring-C_green-500 form-textarea;
+    @apply p-2 w-full tracking-wide text-C_blue-600 dark:text-C_blue-200 bg-C_gray-100 dark:bg-[#333333] rounded border-2 border-C_gray-300 dark:border-C_gray-900 focus:ring-2 focus:border-C_green-500 focus:outline-none focus:ring-C_green-500 form-textarea;
   }
   .nowside-peerInput {
     @apply p-3 pt-10 pb-6 w-full h-10 placeholder:text-transparent text-C_gray-700 bg-C_gray-100 dark:bg-[#333333] rounded border border-C_gray-700 dark:border-C_gray-900 focus:border-C_green-500 dark:focus:border-C_green-500 focus:outline-none;
@@ -66,16 +69,34 @@
 }
 
 @layer utilities {
-  .snap {
-    scroll-snap-type: var(--scroll-snap-direction) var(--scroll-snap-constraint);
+  .scrollbar-lightBlue::-webkit-scrollbar {
+    width: 20px;
+    height: 10px;
   }
-  .snap-y {
-    --scroll-snap-direction: y;
+  .scrollbar-lightBlue::-webkit-scrollbar-track {
+    border-radius: 100vh;
+    background: #BBBBBB;
   }
-  .snap-mandatory {
-    --scroll-snap-constraint: mandatory;
+  .scrollbar-lightBlue::-webkit-scrollbar-thumb {
+    background: #567792;
+    border-radius: 100vh;
   }
-  .snap-start {
-    scroll-snap-align: start;
+  .scrollbar-lightBlue::-webkit-scrollbar-thumb:hover {
+    background: #6E92AF;
+  }
+  .scrollbar-darkBlue::-webkit-scrollbar {
+    width: 20px;
+    height: 10px;
+  }
+  .scrollbar-darkBlue::-webkit-scrollbar-track {
+    border-radius: 100vh;
+    background: #616161;
+  }
+  .scrollbar-darkBlue::-webkit-scrollbar-thumb {
+    background: #6E92AF;
+    border-radius: 100vh;
+  }
+  .scrollbar-darkBlue::-webkit-scrollbar-thumb:hover {
+    background: #89AECD;
   }
 }

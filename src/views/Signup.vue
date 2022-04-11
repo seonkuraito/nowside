@@ -1,12 +1,72 @@
 <script>
-import { S_uploadProfile, S_signup, } from '@/http/api';
+import { S_uploadProfile, S_signup, S_login, } from '@/http/api';
+import default06 from '../assets/default-06.png';
+import default07 from '../assets/default-07.png';
+import default08 from '../assets/default-08.png';
 
 export default {
   name: 'Signup',
   components: {},
+  props: {
+    NickName: {
+      type: String,
+      default: '',
+    }
+  },
   data() {
     return {
       isDark: false,
+      defaultPicture: [
+        {
+          Id: 6,
+          Title: 'default-06.png',
+          Content: default06,
+        },
+        {
+          Id: 7,
+          Title: 'default-07.png',
+          Content: default07,
+        },
+        {
+          Id: 8,
+          Title: 'default-08.png',
+          Content: default08,
+        },
+      ],
+      contactTime: [
+        {
+          Id: 1,
+          Content: '00:00～03:00 AM',
+        },
+        {
+          Id: 2,
+          Content: '03:00～06:00 AM',
+        },
+        {
+          Id: 3,
+          Content: '06:00～09:00 AM',
+        },
+        {
+          Id: 4,
+          Content: '09:00～12:00 AM',
+        },
+        {
+          Id: 5,
+          Content: '12:00～03:00 PM',
+        },
+        {
+          Id: 6,
+          Content: '03:00～06:00 PM',
+        },
+        {
+          Id: 7,
+          Content: '06:00～09:00 PM',
+        },
+        {
+          Id: 8,
+          Content: '09:00～12:00 PM',
+        },
+      ],
       signupParams: {
         Account: '',
         Password: '',
@@ -15,7 +75,7 @@ export default {
         ProfilePicture: '',
         ContactTime: '09:00～12:00 PM',
       },
-      confirm: '',
+      Confirm: '',
       displayStep1: true,
       displayStep2: false,
       displayStep3: false,
@@ -24,11 +84,26 @@ export default {
     };
   },
   computed: {
+    // Step2 下一步 disabled 條件
+    isDisabledStep2() {
+      return (this.signupParams.Password === this.Confirm && this.signupParams.Password !== '') ? false : true;
+    },
+    // Step2 下一步 disabled 樣式
+    notAllowedStep2() {
+      return (this.signupParams.Password === this.Confirm && this.signupParams.Password !== '') ? '' : 'cursor-not-allowed';
+    },
+    // Step4 下一步 disabled 條件
+    isDisabledStep4() {
+      return (this.signupParams.ProfilePicture === '') ? true : false;
+    },
+    // Step4 下一步 disabled 樣式
+    notAllowedStep4() {
+      return (this.signupParams.ProfilePicture === '') ? 'cursor-not-allowed' : '';
+    },
     // 大頭貼 預覽
     profileImage() {
       let style = 'str';
       switch (this.profileStatus) {
-        // 'background-image': `url('http://sideprojectnow.rocket-coding.com/Upload/ProfilePicture/${signupParams.ProfilePicture}')`
         case false:
           style = `background-image: url('http://sideprojectnow.rocket-coding.com/Upload/ProfilePicture/${signupParams.ProfilePicture}')`;
           break
@@ -38,6 +113,9 @@ export default {
       };
       return style;
     },
+  },
+  mounted() {
+    if (this.NickName) this.signupParams.NickName = this.NickName;
   },
   methods: {
     // 註冊會員 圖片上傳
@@ -56,15 +134,27 @@ export default {
         console.log(error);
       });
     },
-    // 註冊會員 預設圖片
-    defaultImage() {
-      this.displayStep4 = !this.displayStep4;
-      this.displayStep5 = !this.displayStep5;
-    },
     // 註冊會員
     postSignup() {
       S_signup(this.signupParams).then(res =>{
         console.log(res.data.message);
+        const loginParams = {
+          Account: this.signupParams.Account,
+          Password: this.signupParams.Password,
+        };
+        this.postLogin(loginParams);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    },
+    // 登入會員
+    postLogin(params) {
+      S_login(params)
+      .then(res =>{
+        console.log('message：', res.data.message);
+        console.log('token：', res.data.token);
+        localStorage.setItem('nowsideToken', res.data.token);
       })
       .catch(error => {
         console.log(error);
@@ -86,7 +176,7 @@ export default {
           <!-- LOGO -->
           <div class="my-12">
             <img
-              src="@/assets/logo.png"
+              src="../assets/logo-signup.svg"
               alt="logo"
               class="mx-auto max-h-[126px] align-middle"
             >
@@ -94,7 +184,7 @@ export default {
           <!-- 暱稱 input -->
           <div class="flex flex-col justify-center items-center mb-14 text-C_blue-700 dark:text-C_blue-400">
             <p class="mb-8 text-3xl font-medium">
-              歡迎進入腦塞 project世界
+              歡迎進入腦塞 Project世界
             </p>
             <form class="flex relative justify-center items-center mb-8">
               <input
@@ -183,8 +273,8 @@ export default {
               <div class="relative">
                 <input
                   id="confirm"
-                  v-model="confirm"
-                  type="confirm"
+                  v-model="Confirm"
+                  type="password"
                   name="confirm"     
                   class="peer nowside-peerInput"
                   placeholder="確認密碼"
@@ -192,7 +282,7 @@ export default {
                 <label
                   for="confirm"
                   class="nowside-peerLabel"
-                  :class="[ confirm ? 'nowside-peerFilled' : '' ]"
+                  :class="[ Confirm ? 'nowside-peerFilled' : '' ]"
                 >確認密碼</label>
               </div>
             </form>
@@ -200,6 +290,8 @@ export default {
           <!-- 按鈕 -->
           <div>
             <button
+              :disabled="isDisabledStep2"
+              :class="notAllowedStep2"
               type="button"
               class="mb-12 nowside-button-darkBlue-lg"
               @click="displayStep2 = !displayStep2, displayStep3 = !displayStep3"
@@ -303,35 +395,15 @@ export default {
             <div class="flex justify-around items-center mb-14 w-full">
               <span class="text-3xl text-C_blue-700 material-icons">arrow_back_ios</span>
               <button
+                v-for="picture in defaultPicture"
+                :key="picture.Id"
                 type="button"
                 class="overflow-hidden w-[96px] h-[96px] rounded-full border-2 hover:border-4 dark:hover:border-4 border-C_gray-300 hover:border-C_green-500 dark:border-C_gray-900 dark:hover:border-C_green-500"
-                @click="signupParams.ProfilePicture = 'default-06.png'"
+                @click="signupParams.ProfilePicture = picture.Title"
               >
                 <img
-                  src="../assets/default-06.png"
-                  alt="default-06"
-                  class="align-middle"
-                >
-              </button>
-              <button
-                type="button"
-                class="overflow-hidden w-[96px] h-[96px] rounded-full border-2 hover:border-4 dark:hover:border-4 border-C_gray-300 hover:border-C_green-500 dark:border-C_gray-900 dark:hover:border-C_green-500"
-                @click="signupParams.ProfilePicture = 'default-07.png'"
-              >
-                <img
-                  src="../assets/default-07.png"
-                  alt="default-07"
-                  class="align-middle"
-                >
-              </button>
-              <button
-                type="button"
-                class="overflow-hidden w-[96px] h-[96px] rounded-full border-2 hover:border-4 dark:hover:border-4 border-C_gray-300 hover:border-C_green-500 dark:border-C_gray-900 dark:hover:border-C_green-500"
-                @click="signupParams.ProfilePicture = 'default-08.png'"
-              >
-                <img
-                  src="../assets/default-08.png"
-                  alt="default-08"
+                  :src="picture.Content"
+                  :alt="picture.Title"
                   class="align-middle"
                 >
               </button>
@@ -364,13 +436,15 @@ export default {
             >
               上傳
             </button>
-            <router-link
+            <button
+              :disabled="isDisabledStep4"
+              type="button"
               class="mb-12 nowside-button-lightBlue-lg"
-              to="/signup"
-              @click="defaultImage"
+              :class="notAllowedStep4"
+              @click="displayStep4 = !displayStep4, displayStep5 = !displayStep5"
             >
               下一步
-            </router-link>
+            </button>
             <p class="flex justify-center text-xs text-C_blue-600 dark:text-C_blue-200">
               完成後，進一步填寫個人資料設定
             </p>
@@ -390,7 +464,7 @@ export default {
           <!-- 大頭貼 -->
           <div class="flex justify-around items-center my-12 w-full">
             <div
-              class="flex overflow-hidden items-center w-[160px] h-[160px] rounded-full border-2 border-C_gray-300 dark:border-C_gray-900 nowside-backgroundImage"
+              class="flex overflow-hidden items-center w-[160px] h-[160px] bg-C_gray-100 dark:bg-[#333333] rounded-full nowside-backgroundImage"
               :style="{ 'background-image': `url('http://sideprojectnow.rocket-coding.com/Upload/ProfilePicture/${signupParams.ProfilePicture}')` }"
             ></div>
             <!-- <img> -->
@@ -409,29 +483,12 @@ export default {
               name="contactTime"
               class="py-4 pl-6 w-full text-lg font-bold text-C_blue-700 dark:text-C_blue-200 indent-20 bg-C_gray-100 dark:bg-[#333333] rounded border border-C_gray-700 focus:border-C_green-500 dark:border-C_gray-900 focus:outline-none active:outline-none focus:ring-C_green-500 form-select"
             >
-              <option value="00:00～03:00 AM">
-                00:00～03:00 AM
-              </option>
-              <option value="03:00～06:00 AM">
-                03:00～06:00 AM
-              </option>
-              <option value="06:00～09:00 AM">
-                06:00～09:00 AM
-              </option>
-              <option value="09:00～12:00 AM">
-                09:00～12:00 AM
-              </option>
-              <option value="12:00～03:00 PM">
-                12:00～03:00 PM
-              </option>
-              <option value="03:00～06:00 PM">
-                03:00～06:00 PM
-              </option>
-              <option value="06:00～09:00 PM">
-                06:00～09:00 PM
-              </option>
-              <option value="09:00～12:00 PM">
-                09:00～12:00 PM
+              <option
+                v-for="time in contactTime"
+                :key="time.Id"
+                :value="time.Content"
+              >
+                {{ time.Content }}
               </option>
             </select>
           </div>
@@ -439,7 +496,7 @@ export default {
           <div>
             <router-link
               class="mb-12 nowside-button-darkBlue-lg"
-              to="/project"
+              to="/account"
               @click="postSignup"
             >
               完成

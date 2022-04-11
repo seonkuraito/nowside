@@ -1,11 +1,20 @@
 <script>
-import { S_getUserInfo, S_editUserInfo, S_uploadProfile } from '@/http/api';
+import { S_getSkills, S_getUserInfo, S_editUserInfo, S_uploadProfile } from '@/http/api';
+import multiselect from '@vueform/multiselect'
 
 export default {
   name: 'AccountEdit',
-  components: {},
+  components: {
+    multiselect,
+  },
   data() {
     return {
+      skillsData: [
+        {
+          Id: 0,
+          skill: '',
+        },
+      ],
       accountParams: {
         ProfilePicture: '',
         NickName: '',
@@ -21,7 +30,7 @@ export default {
         Industry: '',
         Position: '',
         JobDescription: '',
-        Skills: [], // 無資料的話為 null
+        Skills: null,
         SelfIntroduction: '',
       },
       password: '',
@@ -30,14 +39,37 @@ export default {
   },
   computed: {},
   mounted() {
+    this.getSkillsParams();
     this.getAccountParams();
   },
   methods: {
+    // 取得技能列表
+    getSkillsParams() {
+      S_getSkills().then(res =>{
+        console.log('技能列表', res.data.Skilldata);
+        this.skillsData = res.data.Skilldata;
+
+        const data = [];
+        this.skillsData.forEach(function(item) {
+          data.push({ value: item.Id, label: item.skill });
+        });
+        this.skillsData = data;
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    },
     // 取得會員資料
     getAccountParams() {
       S_getUserInfo().then(res =>{
         console.log('取得會員資料', res.data.userdata);
         this.accountParams = res.data.userdata;
+
+        const data = [];
+        this.accountParams.Skills.forEach(function(item) {
+          data.push(item.Id);
+        });
+        this.accountParams.Skills = data;
       })
       .catch(error => {
         console.log(error);
@@ -354,15 +386,20 @@ export default {
                 for="profileWebsite"
                 class="mr-5 min-w-[96px] text-lg font-medium text-C_blue-500 dark:text-C_blue-400"
               >技能</label>
-              <div class="p-2 w-full h-[140px] text-lg text-C_blue-600 bg-C_gray-100 dark:bg-[#333333] rounded border border-C_gray-300 dark:border-C_gray-900">
-                <div
-                  v-for="skill in accountParams.Skills"
-                  :key="skill.Id"
-                  class="inline-block mr-2 mb-4 bg-C_blue-200 rounded"
-                >
-                  <span class="px-4">{{ skill.skill }}</span>
-                </div>
-              </div>
+              <multiselect
+                v-model="accountParams.Skills"
+                mode="tags"
+                :classes="{
+                  container: 'relative p-1 mx-auto w-full h-[140px] flex items-start justify-end box-border cursor-pointer border-2 border-C_gray-300 dark:border-C_gray-900 rounded bg-C_gray-100 dark:bg-[#333333] text-base leading-snug outline-none',
+                  containerActive: 'border-2 ring-2 ring-C_green-500',
+                  tag: 'flex items-center py-0.5 pl-2 mr-2 mb-2 text-C_blue-700 whitespace-nowrap bg-C_blue-200 rounded',
+                  tagsSearch: 'absolute inset-0 border-0 outline-none focus:ring-0 appearance-none p-0 text-base font-sans box-border w-full bg-C_gray-100 dark:bg-[#333333]',
+                }"
+                :close-on-select="false"
+                :searchable="true"
+                :create-option="true"
+                :options="skillsData"
+              ></multiselect>
             </form>
           </li>
           <!-- 自我介紹 -->
@@ -403,3 +440,5 @@ export default {
     </div>
   </article>
 </template>
+
+<style src="@vueform/multiselect/themes/default.css"></style>

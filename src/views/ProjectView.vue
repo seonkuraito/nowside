@@ -153,7 +153,7 @@ export default {
       <div class="flex flex-col justify-center items-center mb-14 w-full">
         <!-- 圖片 -->
         <div
-          class="mb-12 w-[304px] h-[304px] rounded-full border-2 border-C_gray-300 dark:border-C_gray-900 shadow-xl nowside-backgroundImage"
+          class="mb-12 w-[304px] h-[304px] bg-C_gray-100 dark:bg-[#333333] rounded-full shadow-xl nowside-backgroundImage"
           :style="{ 'background-image': `url('http://sideprojectnow.rocket-coding.com/Upload/GroupPicture/${detailParams.GroupPhoto}')` }"
         ></div>
         <!-- 標題 -->
@@ -303,7 +303,7 @@ export default {
               >
                 <div
                   class="mr-6 min-w-[72px] min-h-[72px] rounded-full nowside-backgroundImage"
-                  :style="{ 'background-image': `url('http://sideprojectnow.rocket-coding.com/Upload/GroupPicture/${member.ProfilePicture}')` }"
+                  :style="{ 'background-image': `url('http://sideprojectnow.rocket-coding.com/Upload/ProfilePicture/${member.ProfilePicture}')` }"
                 ></div>
                 <div class="flex flex-col max-w-[100px]">
                   <p class="mb-1 text-C_blue-700 dark:text-C_blue-200 truncate">
@@ -322,7 +322,7 @@ export default {
               >
                 <div
                   class="mr-6 min-w-[72px] min-h-[72px] rounded-full nowside-backgroundImage"
-                  :style="{ 'background-image': `url('http://sideprojectnow.rocket-coding.com/Upload/GroupPicture/${member.ProfilePicture}')` }"
+                  :style="{ 'background-image': `url('http://sideprojectnow.rocket-coding.com/Upload/ProfilePicture/${member.ProfilePicture}')` }"
                 ></div>
                 <div class="flex flex-col max-w-[100px]">
                   <p class="mb-1 text-C_blue-700 dark:text-C_blue-200 truncate">

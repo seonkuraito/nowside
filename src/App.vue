@@ -1,7 +1,6 @@
 <script>
 import Header from '@/components/Header.vue';
 import Footer from '@/components/Footer.vue';
-// import LoginModal from '@/components/LoginModal.vue';
 
 export default {
   name: 'App',
@@ -43,7 +42,7 @@ export default {
       class="w-full h-full"
       :style="backgroundImage"
     >
-      <Header @emit="darkModeToggle"></Header>
+      <Header @dark-mode-emit="darkModeToggle"></Header>
       <router-view></router-view>
       <Footer></Footer>
     </section>

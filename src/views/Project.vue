@@ -295,17 +295,18 @@ export default {
             <li
               v-for="project in favoriteListParams"
               :key="project.Id"
-              class="flex items-center mb-8"
             >
-              <div
-                class="w-[80px] h-[80px] rounded-full nowside-backgroundImage"
-                :style="{ 'background-image': `url('http://sideprojectnow.rocket-coding.com/Upload/GroupPicture/${project.GroupPhoto}')` }"
-              ></div>
-              <div>
-                <p class="ml-6 font-medium text-C_blue-500 dark:text-C_blue-200">
-                  {{ project.ProjectName }}
-                </p>
-              </div>
+              <button class="flex items-center p-2 mb-8 text-left hover:bg-C_blue-200 dark:hover:bg-[#333333] rounded-lg">
+                <div
+                  class="min-w-[80px] min-h-[80px] bg-C_gray-100 dark:bg-[#333333] rounded-full nowside-backgroundImage"
+                  :style="{ 'background-image': `url('http://sideprojectnow.rocket-coding.com/Upload/GroupPicture/${project.GroupPhoto}')` }"
+                ></div>
+                <div>
+                  <p class="ml-6 font-medium text-C_blue-500 dark:text-C_blue-200">
+                    {{ project.ProjectName }}
+                  </p>
+                </div>
+              </button>
             </li>
           </ul>
         </div>
@@ -319,7 +320,7 @@ export default {
         >
           <!-- 【左】圖片 -->
           <div
-            class="mr-10 w-[132px] h-[132px] rounded-full border-2 border-C_gray-300 dark:border-C_gray-900 nowside-backgroundImage"
+            class="mr-10 w-[132px] h-[132px] bg-C_gray-100 dark:bg-[#333333] rounded-full nowside-backgroundImage"
             :style="{ 'background-image': `url('http://sideprojectnow.rocket-coding.com/Upload/GroupPicture/${project.GroupPhoto}')` }"
           >
           </div>

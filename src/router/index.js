@@ -1,25 +1,10 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import Home from '../views/Home.vue'
-import Login from '../views/Login.vue'
 import Signup from '../views/Signup.vue'
 import Account from '../views/Account.vue'
 import Create from '../views/Create.vue'
 import Project from '../views/Project.vue'
 import Success from '../views/Success.vue'
-
-// <router-link> 跳轉路由的標籤
-// <router-view> 顯示「目前所在」路由對應的元件內容
-// 例：目前位於 /signup，<router-view> 則顯示對應的元件 Signup
-
-// component: ...
-// 同步載入
-// 在根目錄就先載入所需的元件
-
-// component: () => import('...')
-// 非同步載入
-// 只有在該路由下才會載入（import）對應的元件
-
-// :to="{ name: 'ProjectView', params: { projectId: project.Id, }, hash: '#XXX' }"
 
 const router = createRouter({
   history: createWebHashHistory(),
@@ -30,13 +15,9 @@ const router = createRouter({
       component: Home,
     },
     {
-      path: '/login',
-      name: 'Login',
-      component: Login,
-    },
-    {
       path: '/signup',
       name: 'Signup',
+      props: (route) => ({ NickName: route.params.NickName }),
       component: Signup,
     },
     {

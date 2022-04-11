@@ -1,25 +1,29 @@
 <script>
-import { S_login } from '@/http/api';
+import { S_login, } from '@/http/api';
 
 export default {
   name: 'LoginModal',
   data() {
     return {
+      isDisplay: true,
       loginParams: {
-        account: '',
-        password: '',
+        Account: '',
+        Password: '',
       },
     };
   },
   computed: {},
   methods: {
+    // 關閉 Modal 視窗
+    closing() {
+      this.isDisplay = false;
+    },
     // 登入會員
     postLogin() {
       S_login(this.loginParams)
       .then(res =>{
         console.log('message：', res.data.message);
         console.log('token：', res.data.token);
-        // 使用 setItem 將 token 存入 localStorage
         localStorage.setItem('nowsideToken', res.data.token);
       })
       .catch(error => {
@@ -31,16 +35,25 @@ export default {
 </script>
 
 <template>
-  <article class="flex justify-center items-center min-h-screen">
-    <div class="relative mx-auto min-w-[464px] nowside-shadow">
+  <article
+    v-if="display === true"
+    class="flex fixed top-0 left-0 z-50 justify-center items-center w-screen h-screen"
+  >
+    <!-- Modal-Overlay -->
+    <section
+      class="absolute top-0 left-0 w-full h-full bg-black/50"
+      @click="closing"
+    ></section>
+    <!-- Modal-Window -->
+    <section class="relative mx-auto min-w-[464px] nowside-shadow">
       <div class="my-8 mx-auto max-w-[384px]">
-        <section class="my-8">
+        <div class="my-8">
           <!-- LOGO + 信箱密碼 input -->
           <div class="mb-14 text-C_gray-700">
             <!-- LOGO -->
-            <div class="mb-6">
+            <div class="mb-12">
               <img
-                src="@/assets/logo.png"
+                src="../assets/logo-login.svg"
                 alt="logo"
                 class="mx-auto max-h-[126px] align-middle"
               >
@@ -50,7 +63,7 @@ export default {
               <form class="relative mb-6">
                 <input
                   id="account"
-                  v-model="loginParams.account"
+                  v-model="loginParams.Account"
                   name="account" 
                   type="text"
                   class="peer nowside-peerInput"
@@ -59,13 +72,13 @@ export default {
                 <label
                   for="account"
                   class="nowside-peerLabel"
-                  :class="[ loginParams.account ? 'nowside-peerFilled' : '' ]"
+                  :class="[ loginParams.Account ? 'nowside-peerFilled' : '' ]"
                 >信箱</label>
               </form>
               <form class="relative">
                 <input
                   id="password"
-                  v-model="loginParams.password"
+                  v-model="loginParams.Password"
                   type="password"
                   name="password"     
                   class="peer nowside-peerInput"
@@ -74,7 +87,7 @@ export default {
                 <label
                   for="password"
                   class="nowside-peerLabel"
-                  :class="[ loginParams.password ? 'nowside-peerFilled' : '' ]"
+                  :class="[ loginParams.Password ? 'nowside-peerFilled' : '' ]"
                 >密碼</label>
               </form>
             </div>
@@ -115,8 +128,8 @@ export default {
               沒有信箱？立即註冊
             </p>
           </div>
-        </section>
+        </div>
       </div>
-    </div>
+    </section>
   </article>
 </template>

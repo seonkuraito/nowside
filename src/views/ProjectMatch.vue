@@ -1,5 +1,12 @@
 <script>
-import { S_getProjectDetail, S_getApplicant, S_getApplicantInfo, S_passApplicant, S_rejectApplicant, } from '@/http/api';
+import {
+  S_getProjectDetail,
+  S_getApplicant,
+  S_getApplicantInfo,
+  S_passApplicant,
+  S_rejectApplicant,
+  S_startProject,
+} from '@/http/api';
 import moment from 'moment';
 
 export default {
@@ -19,34 +26,34 @@ export default {
       },
       listParams: [
         {
-          // ProjectsId: 0,
-          // ApplicantState: '',
-          // InitDate: '',
-          // NickName: '',
-          // ApplicantMessage: '',
-          // MembersId: 0,
+          ProjectsId: 0,
+          ApplicantState: '',
+          InitDate: '',
+          NickName: '',
+          ApplicantMessage: '',
+          MembersId: 0,
         },
       ],
       applicantParams: [
         {
-          // ProfilePicture: '',
-          // NickName: '',
-          // Gender: '',
-          // Account: '',
-          // Fb: null,
-          // Ig: null,
-          // ProfileWebsite: null,
-          // ContactTime: '',
-          // WorkState: null,
-          // Language: null,
-          // Company: null,
-          // Industry: null,
-          // JobDescription: null,
-          // Position: null,
+          ProfilePicture: '',
+          NickName: '',
+          Gender: '',
+          Account: '',
+          Fb: null,
+          Ig: null,
+          ProfileWebsite: null,
+          ContactTime: '',
+          WorkState: null,
+          Language: null,
+          Company: null,
+          Industry: null,
+          JobDescription: null,
+          Position: null,
           Skills: null,
-          // SelfIntoduction: [
-          //   '',
-          // ],
+          SelfIntoduction: [
+            '',
+          ],
         },
       ],
       tableStatus: false,
@@ -105,6 +112,15 @@ export default {
     postReject(projectId, memberId) {
       S_rejectApplicant(projectId, memberId).then(res =>{
         console.log('不通過申請人', res.data.status);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    },
+    // 確認所有組員 開始專案
+    postStart(projectId, memberId) {
+      S_startProject(projectId, memberId).then(res =>{
+        console.log('確認所有組員 開始專案', res.data.status);
       })
       .catch(error => {
         console.log(error);

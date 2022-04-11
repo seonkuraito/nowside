@@ -128,11 +128,10 @@ export default {
   <article class="pt-[60px] pb-[180px] w-full h-full">
     <!-- Banner -->
     <section class="flex justify-center mb-28 bg-C_gray-100">
-      <img
-        class="object-cover w-screen h-[560px]"
-        :src="`http://sideprojectnow.rocket-coding.com/Upload/GroupPicture/${detailParams.ProjectBanner}`"
-        alt="banner"
-      >
+      <div
+        class="w-screen h-[560px] nowside-backgroundImage"
+        :style="{ 'background-image': `url('http://sideprojectnow.rocket-coding.com/Upload/Banner/${detailParams.ProjectBanner}')` }"
+      ></div>
     </section>
     <!-- 內容 -->
     <section class="flex relative flex-col py-20 px-24 mb-12 nowside-container-lg nowside-shadow">
@@ -140,7 +139,7 @@ export default {
       <div class="flex flex-col justify-center items-center mb-14 w-full">
         <!-- 圖片 -->
         <div
-          class="mb-12 w-[304px] h-[304px] rounded-full border-2 border-C_gray-300 dark:border-C_gray-900 shadow-xl nowside-backgroundImage"
+          class="mb-12 w-[304px] h-[304px] bg-C_gray-100 dark:bg-[#333333] rounded-full shadow-xl nowside-backgroundImage"
           :style="{ 'background-image': `url('http://sideprojectnow.rocket-coding.com/Upload/GroupPicture/${detailParams.GroupPhoto}')` }"
         ></div>
         <!-- 標題 -->
@@ -222,16 +221,29 @@ export default {
       <div>
         <ul class="text-C_blue-800">
           <!-- 內容圖片 -->
-          <li class="overflow-y-scroll mb-10 max-h-[234px] snap-y snap-mandatory snap">
-            <div class="w-full h-[234px] bg-red-100 snap-start"></div>
-            <div class="w-full h-[234px] bg-red-200 snap-start"></div>
-            <div class="w-full h-[234px] bg-red-300 snap-start"></div>
-            <div class="w-full h-[234px] bg-red-400 snap-start"></div>
-            <div class="w-full h-[234px] bg-red-500 snap-start"></div>
-            <div class="w-full h-[234px] bg-red-600 snap-start"></div>
-            <div class="w-full h-[234px] bg-red-700 snap-start"></div>
-            <div class="w-full h-[234px] bg-red-800 snap-start"></div>
-            <div class="w-full h-[234px] bg-red-900 snap-start"></div>
+          <li class="mb-10">
+            <p class="inline-block mb-4 text-lg font-medium text-C_blue-700 dark:text-C_blue-400">
+              內容圖片
+            </p><br>
+            <div class="flex overflow-scroll overflow-y-hidden mx-auto w-full h-80 bg-C_gray-100 dark:bg-[#333333] rounded snap-x snap-mandatory scrollbar-lightBlue dark:scrollbar-darkBlue">
+              <!-- 左區塊 -->
+              <div class="flex shrink-0 justify-center items-center ml-80 h-full snap-center">
+              </div>
+              <!-- 圖片 -->
+              <div
+                v-for="picture in detailParams.ProjectPictures"
+                :key="picture.item"
+                class="flex shrink-0 justify-center items-center w-2/5 h-full snap-center"
+              >
+                <div
+                  class="w-[416px] h-[234px] rounded-lg nowside-backgroundImage"
+                  :style="{ 'background-image': `url('http://sideprojectnow.rocket-coding.com/Upload/FinishedPicture/${picture.item}')` }"
+                ></div>
+              </div>
+              <!-- 右區塊 -->
+              <div class="flex shrink-0 justify-center items-center mr-80 h-full snap-center">
+              </div>
+            </div>
           </li>
           <!-- 專案內容 -->
           <li class="mb-10">
@@ -293,7 +305,7 @@ export default {
               >
                 <div
                   class="mr-6 min-w-[72px] min-h-[72px] rounded-full nowside-backgroundImage"
-                  :style="{ 'background-image': `url('http://sideprojectnow.rocket-coding.com/Upload/GroupPicture/${member.ProfilePicture}')` }"
+                  :style="{ 'background-image': `url('http://sideprojectnow.rocket-coding.com/Upload/ProfilePicture/${member.ProfilePicture}')` }"
                 ></div>
                 <div class="flex flex-col max-w-[100px]">
                   <p class="mb-1 text-C_blue-700 dark:text-C_blue-200 truncate">
@@ -312,7 +324,7 @@ export default {
               >
                 <div
                   class="mr-6 min-w-[72px] min-h-[72px] rounded-full nowside-backgroundImage"
-                  :style="{ 'background-image': `url('http://sideprojectnow.rocket-coding.com/Upload/GroupPicture/${member.ProfilePicture}')` }"
+                  :style="{ 'background-image': `url('http://sideprojectnow.rocket-coding.com/Upload/ProfilePicture/${member.ProfilePicture}')` }"
                 ></div>
                 <div class="flex flex-col max-w-[100px]">
                   <p class="mb-1 text-C_blue-700 dark:text-C_blue-200 truncate">

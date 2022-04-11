@@ -3,7 +3,9 @@ export default {
   name: 'Home',
   components: {},
   data() {
-    return {};
+    return {
+      NickName: '',
+    };
   },
   computed: {},
   methods: {},
@@ -52,17 +54,19 @@ export default {
         <form class=" relative ml-8 w-[636px] h-[62px] rounded-lg shadow-xl dark:shadow-none">
           <input
             id="signup"
+            v-model="NickName"
             name="signup" 
             type="text"
             class="pl-8 w-full h-full text-lg font-medium text-C_gray-700 bg-C_blue-100 dark:bg-[#333333] rounded-lg focus:outline-none ring-1 focus:ring-0 dark:ring-0 ring-C_gray-300"
             placeholder="請輸入暱稱"
           >
-          <button
+          <router-link
             for="signup"
             class="flex absolute top-0 right-0 justify-center items-center w-[192px] h-[62px] text-lg font-medium text-white bg-C_green-500 hover:bg-C_green-400 dark:bg-C_green-600 dark:hover:bg-C_green-500 rounded-lg"
+            :to="{ name: 'Signup', params: { NickName: NickName, } }"
           >
             立即註冊
-          </button>
+          </router-link>
         </form>
       </div>
       <!-- 裝飾元素 -->
@@ -140,7 +144,7 @@ export default {
         <li class="flex relative flex-col justify-between items-center w-[364px] h-[515px]">
           <h3 class="flex justify-center items-center py-1 px-3 font-chillax text-lg font-medium text-C_blue-500 dark:text-C_blue-200 rounded-full border-[3px] border-[#FFF495]">
             <span class="mr-2 text-lg material-icons">mail_outline</span>
-            sharonwang.ichun@gmail.com
+            <span class="select-all">sharonwang.ichun@gmail.com</span>
           </h3>
           <section class="flex justify-center items-center">
             <div class="relative w-[364px]">
@@ -150,13 +154,14 @@ export default {
                   src="../assets/Member-Sharon.png"
                   alt=""
                 >
+                <!-- hover 顯示 -->
                 <div class="overlay">
-                  <h3 class="text-lg">
+                  <h6 class="text-lg">
                     選擇障礙
-                  </h3>
-                  <a class="text-lg">
+                  </h6>
+                  <button class="text-lg">
                     空瑜小萌新
-                  </a>
+                  </button>
                   <p class="text-lg">
                     傳說對決送頭達人
                   </p>
@@ -170,7 +175,7 @@ export default {
         <li class="flex relative flex-col justify-between items-center w-[364px] h-[515px]">
           <h3 class="flex justify-center items-center py-1 px-3 font-chillax text-lg font-medium text-C_blue-500 dark:text-C_blue-200 rounded-full border-[3px] border-[#FFBA7B]">
             <span class="mr-2 text-lg material-icons">mail_outline</span>
-            seon.kuraito@gmail.com
+            <span class="select-all">seon.kuraito@gmail.com</span>
           </h3>
           <section class="flex justify-center items-center">
             <div class="relative w-[364px]">
@@ -180,13 +185,14 @@ export default {
                   src="../assets/Member-Dennis.png"
                   alt=""
                 >
+                <!-- hover 顯示 -->
                 <div class="overlay">
-                  <h3 class="text-lg">
+                  <h6 class="text-lg">
                     養老作息
-                  </h3>
-                  <a class="text-lg">
+                  </h6>
+                  <button class="text-lg">
                     無情挖坑
-                  </a>
+                  </button>
                   <p class="text-lg">
                     愛鳥人士養成中
                   </p>
@@ -200,7 +206,7 @@ export default {
         <li class="flex relative flex-col justify-between items-center w-[364px] h-[515px]">
           <h3 class="flex justify-center items-center py-1 px-3 font-chillax text-lg font-medium text-C_blue-500 dark:text-C_blue-200 rounded-full border-[3px] border-[#FF7B7B]">
             <span class="mr-2 text-lg material-icons">mail_outline</span>
-            clara014789@gmail.com
+            <span class="select-all">clara014789@gmail.com</span>
           </h3>
           <section class="flex justify-center items-center">
             <div class="relative w-[364px]">
@@ -210,13 +216,14 @@ export default {
                   src="../assets/Member-Clara.png"
                   alt=""
                 >
+                <!-- hover 顯示 -->
                 <div class="overlay">
-                  <h3 class="text-lg">
+                  <h6 class="text-lg">
                     咖啡成癮
-                  </h3>
-                  <a class="text-lg">
+                  </h6>
+                  <button class="text-lg">
                     吃貨一名
-                  </a>
+                  </button>
                   <p class="text-lg">
                     Figma 愛好者
                   </p>
@@ -344,7 +351,7 @@ export default {
   -webkit-filter: brightness(0.6);
 }
 
-.hovereffect h3 {
+.hovereffect h6 {
   text-transform: uppercase;
   text-align: center;
   position: relative;
@@ -359,9 +366,9 @@ export default {
   transform: translate3d(0,-100%,0);
 }
 
-.hovereffect a {
+.hovereffect button {
   color: #FFF;
-  padding: 1em 0;
+  padding: 0;
   opacity: 0;
   filter: alpha(opacity=0);
   -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
@@ -381,7 +388,7 @@ export default {
   transform: translate3d(0,100%,0);
 }
 
-.hovereffect:hover a, .hovereffect:hover p, .hovereffect:hover h3 {
+.hovereffect:hover h6, .hovereffect:hover button, .hovereffect:hover p {
   opacity: 1;
   filter: alpha(opacity=100);
   -webkit-transform: translate3d(0,0,0);
