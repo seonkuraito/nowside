@@ -161,6 +161,9 @@ export default {
     postMessageParams() {
       S_sendProjectMessage(this.projectId, this.messageTitle, this.messageContent).then(res =>{
         console.log('送出專案留言', res.data);
+        this.messageTitle = '',
+        this.messageContent = '',
+        this.getMessageParams();
       })
       .catch(error => {
         console.log(error);

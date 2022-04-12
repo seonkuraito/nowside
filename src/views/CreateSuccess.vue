@@ -231,6 +231,13 @@ export default {
     postProjectParams() {
       S_checkSussessProject(this.projectId, this.successParams).then(res =>{
         console.log('完成專案資料', res);
+        this.$router.push({ name: 'Success' });
+
+        this.$notify({
+          group: "foo",
+          title: "Success",
+          text: "恭喜您，專案已成功完成。"
+        }, 3500)
       })
       .catch(error => {
         console.log(error);

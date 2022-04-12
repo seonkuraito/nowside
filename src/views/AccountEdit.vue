@@ -94,6 +94,12 @@ export default {
       S_editUserInfo(this.accountParams).then(res =>{
         console.log('編輯會員資料', res.data);
         this.$router.push({ name: 'Account' });
+
+        this.$notify({
+          group: "foo",
+          title: "Success",
+          text: "編輯成功，會員資料已更新。"
+        }, 3500)
       })
       .catch(error => {
         console.log(error);

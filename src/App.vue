@@ -39,11 +39,6 @@ export default {
     // 深夜模式 切換
     darkModeToggle() {
       this.isDark = !this.isDark;
-      this.$notify({
-        group: "foo",
-        title: "Success",
-        text: "登入成功，歡迎來到 Side Project Now。"
-      }, 7000)
     },
     // 發起專案 驗證
     createProjectToggle() {
@@ -79,6 +74,12 @@ export default {
         console.log('token：', res.data.token);
         localStorage.setItem('nowsideToken', res.data.token);
         this.isDisplay = false;
+
+        this.$notify({
+          group: "foo",
+          title: "Success",
+          text: "登入成功，歡迎來到 Side Project Now。"
+        }, 3500)
       })
       .catch(error => {
         console.log(error);
@@ -126,7 +127,7 @@ export default {
                 </svg>
               </div>
 
-              <div class="py-4 px-5 -mx-3">
+              <div class="py-3 px-5 -mx-3">
                 <div class="mx-3">
                   <span class="text-lg font-semibold text-C_green-500">{{ notification.title }}</span>
                   <p class=" text-gray-600 dark:text-C_blue-200">

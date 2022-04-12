@@ -507,7 +507,7 @@ export default {
                       <form>
                         <textarea
                           id="selfIntroduction"
-                          v-model="applicant.SelfIntroduction"
+                          v-model="applicant.SelfIntoduction"
                           class="nowside-textarea"
                           name="selfIntroduction"
                           rows="5"

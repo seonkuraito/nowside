@@ -183,7 +183,7 @@ export default {
 </script>
 
 <template>
-  <article class="pt-[60px] pb-[180px] w-full h-full">
+  <article class="py-[180px] w-full h-full">
     <!-- Banner -->
     <!-- <section class="flex justify-center mb-28 bg-C_gray-100">
       <img

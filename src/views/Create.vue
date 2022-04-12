@@ -89,7 +89,7 @@ export default {
         Id: 0,
         ProjectName: '請輸入專案名稱',
         ProjectContext: '',
-        GroupPhoto: '',
+        GroupPhoto: 'default-project.png',
         InitDate: '',
         GroupDeadline: '',
         FinishedDeadline: '',
@@ -159,6 +159,12 @@ export default {
       S_addProject(this.projectParams).then(res =>{
         console.log('新增專案資料', res);
         this.$router.push({ name: 'Project' });
+
+        this.$notify({
+          group: "foo",
+          title: "Success",
+          text: "新增成功，專案已成功建立。"
+        }, 3500)
       })
       .catch(error => {
         console.log(error);
@@ -180,7 +186,7 @@ export default {
       <section class="flex flex-col justify-center items-center mb-24">
         <div class="relative mb-20 h-[415px]">
           <div
-            class="w-[415px] h-[415px] rounded-full shadow-xl dark:shadow-gray-800 nowside-backgroundImage"
+            class="w-[415px] h-[415px] bg-C_gray-100 dark:bg-[#333333] rounded-full shadow-xl dark:shadow-gray-800 nowside-backgroundImage"
             :style="{ 'background-image': `url('http://sideprojectnow.rocket-coding.com/Upload/GroupPicture/${projectParams.GroupPhoto}')` }"
           ></div>
           <form>
