@@ -29,6 +29,12 @@ export default {
       S_attendProject(this.projectId, this.attendParams).then(res =>{
         console.log('參與專案', res.data);
         this.$router.push({ name: 'ProjectView', params: { projectId: this.projectId, },});
+
+        this.$notify({
+          group: "foo",
+          title: "Success",
+          text: "申請成功，請等待發起人的審核。"
+        }, 3500)
       })
       .catch(error => {
         console.log(error);

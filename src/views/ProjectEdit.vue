@@ -177,6 +177,12 @@ export default {
       S_editProject(this.projectId, this.detailParams).then(res =>{
         console.log('編輯專案詳細內容', res.data);
         this.$router.push({ name: 'ProjectView', params: { projectId: this.projectId, },});
+
+        this.$notify({
+          group: "foo",
+          title: "Success",
+          text: "編輯成功，專案已成功更新。"
+        }, 3500)
       })
       .catch(error => {
         console.log(error);
@@ -189,9 +195,6 @@ export default {
     },
     // 專題種類 selected
     optionSelected(type) {
-      console.log(type.Id);
-      console.log(this.detailParams.ProjectTypeId[0]);
-      console.log((type.Id === this.detailParams.ProjectTypeId[0]?.Id) ? true : false);
       return (type.Id === this.detailParams.ProjectTypeId[0]?.Id) ? true : false;
     },
   },

@@ -113,7 +113,7 @@ export default {
         console.log(error);
       });
     },
-    // 取得所有專案列表【無登入】
+    // 取得所有專案列表
     getGuestListParams() {
       S_getSuccessProjectGuestNoPage().then(res =>{
         console.log('取得所有專案列表', res.data.data);

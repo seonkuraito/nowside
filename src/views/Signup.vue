@@ -143,6 +143,12 @@ export default {
           Password: this.signupParams.Password,
         };
         this.postLogin(loginParams);
+
+        this.$notify({
+          group: "foo",
+          title: "Success",
+          text: "註冊成功，歡迎來到 Side Project Now。"
+        }, 3500)
       })
       .catch(error => {
         console.log(error);
@@ -156,12 +162,6 @@ export default {
         console.log('token：', res.data.token);
         localStorage.setItem('nowsideToken', res.data.token);
         this.$router.push({ name: 'Account' });
-
-        this.$notify({
-          group: "foo",
-          title: "Success",
-          text: "登入成功，歡迎來到 Side Project Now。"
-        }, 3500)
       })
       .catch(error => {
         console.log(error);

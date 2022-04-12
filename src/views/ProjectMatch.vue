@@ -109,6 +109,12 @@ export default {
       S_passApplicant(projectId, memberId).then(res =>{
         console.log('通過申請人', res.data.status);
         this.getListParams();
+
+        this.$notify({
+          group: "foo",
+          title: "Success",
+          text: "已通過申請人。"
+        }, 3500)
       })
       .catch(error => {
         console.log(error);
@@ -119,6 +125,12 @@ export default {
       S_rejectApplicant(projectId, memberId).then(res =>{
         console.log('不通過申請人', res.data.status);
         this.getListParams();
+
+          this.$notify({
+            group: "foo",
+            title: "Success",
+            text: "申請人不通過。"
+          }, 3500)
       })
       .catch(error => {
         console.log(error);
@@ -129,6 +141,12 @@ export default {
       S_startProject(this.projectId).then(res =>{
         console.log('確認所有組員 開始專案', res.data.status);
         this.$router.push({ name: 'ProjectView', params: { projectId: this.projectId, },});
+
+          this.$notify({
+            group: "foo",
+            title: "Success",
+            text: "媒合成功，專案已順利開始。"
+          }, 3500)
       })
       .catch(error => {
         console.log(error);

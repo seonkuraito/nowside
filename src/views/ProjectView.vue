@@ -122,6 +122,12 @@ export default {
       S_giveUpProject(this.projectId).then(res =>{
         console.log('廢棄專案', res.data);
         this.getDetailParams();
+
+        this.$notify({
+          group: "foo",
+          title: "Success",
+          text: "專案已廢棄。"
+        }, 3500)
       })
       .catch(error => {
         console.log(error);
@@ -132,6 +138,12 @@ export default {
       S_deleteProject(this.projectId).then(res =>{
         console.log('刪除專案', res.data);
         this.getDetailParams();
+
+        this.$notify({
+          group: "foo",
+          title: "Success",
+          text: "專案已刪除。"
+        }, 3500)
       })
       .catch(error => {
         console.log(error);
@@ -142,6 +154,12 @@ export default {
       S_closeProject(this.projectId).then(res =>{
         console.log('關閉專案', res.data);
         this.getDetailParams();
+
+        this.$notify({
+          group: "foo",
+          title: "Success",
+          text: "專案已關閉。"
+        }, 3500)
       })
       .catch(error => {
         console.log(error);
@@ -152,6 +170,12 @@ export default {
       S_restartProject(this.projectId).then(res =>{
         console.log('重啟專案', res.data);
         this.getDetailParams();
+
+        this.$notify({
+          group: "foo",
+          title: "Success",
+          text: "專案已重啟。"
+        }, 3500)
       })
       .catch(error => {
         console.log(error);
@@ -164,6 +188,12 @@ export default {
         this.messageTitle = '',
         this.messageContent = '',
         this.getMessageParams();
+
+        this.$notify({
+          group: "foo",
+          title: "Success",
+          text: "留言成功，發起人已收到您的訊息。"
+        }, 3500)
       })
       .catch(error => {
         console.log(error);
@@ -177,6 +207,12 @@ export default {
           console.log('收藏專案', res.data);
           this.favoriteActive = true;
           this.getListParams();
+
+          this.$notify({
+            group: "foo",
+            title: "Success",
+            text: "收藏成功，專案已成功儲存。"
+          }, 3500)
         })
         .catch(error => {
           console.log(error);
@@ -192,6 +228,12 @@ export default {
           console.log('取消收藏專案', res.data);
           this.favoriteActive = false;
           this.getListParams();
+
+          this.$notify({
+            group: "foo",
+            title: "Success",
+            text: "取消收藏，專案已成功移除。"
+          }, 3500)
         })
         .catch(error => {
           console.log(error);
