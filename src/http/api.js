@@ -28,15 +28,7 @@ export const S_getSaveProjectNoPage = (params) => axiosInstance.get('/GetSavePro
 // CreateProject
 export const S_addProject = (params) => axiosInstance.post('/AddProject',params); // 新增專案資料
 export const S_uploadGroupPic = (params) => axiosForm.post('/UploadGroupPic',params); // 新增專案資料 圖片上傳
-export const S_editProject = (paramsA, paramsB) => axiosInstance.put(`/EditProject?Id=${paramsA}`, paramsB); // 編輯專案詳細內容
-
-// Match
-export const S_getApplicant = (params) => axiosInstance.get(`/GetApplicant?id=${params}`); // 取得申請人列表
-export const S_getApplicantInfo = (paramsA, paramsB) => axiosInstance.get(`/GetApplicantInfo?memberId=${paramsB}&projectId=${paramsA}`); // 取得申請人資料
-export const S_passApplicant = (paramsA, paramsB) => axiosInstance.post(`/PassApplicant?memberId=${paramsB}&projectId=${paramsA}`); // 通過申請人
-export const S_rejectApplicant = (paramsA, paramsB) => axiosInstance.post(`/RejectApplicant?memberId=${paramsB}&projectId=${paramsA}`); // 不通過申請人
-export const S_startProject = (params) => axiosInstance.post(`/StartProject?Id=${params}`); // 確認所有組員 開始專案
-export const S_attendProject = (params) => axiosInstance.post(`/AttendProject?Id=${params}`); // 參與專案
+export const S_editProject = (id, data) => axiosInstance.put(`/EditProject?Id=${id}`, data); // 編輯專案詳細內容
 
 // ViewProject
 export const S_getAllProject = (params) => axiosInstance.get('/GetAllProject',params); // 取得所有專案列表
@@ -45,7 +37,16 @@ export const S_getAllProjectGuest = (params) => axiosInstance.get('/GetAllProjec
 export const S_getAllProjectGuestNoPage = (params) => axiosInstance.get('/GetAllProjectGuestNoPage',params); // 取得所有專案列表【無登入】（無分頁）
 export const S_getProjectDetail = (params) => axiosInstance.get(`/GetProjectDetail?Id=${params}`); // 取得專案詳細內容
 export const S_getProjectMessage = (params) => axiosInstance.get(`/GetProjectMessage?projectId=${params}`); // 取得專案留言內容
+export const S_sendProjectMessage = (id, title, content) => axiosForm.post(`/SendProjectMessage?projectId=${id}&title=${title}&messageContent=${content}`); // 送出專案留言
 export const S_checkUser = (params) => axiosForm.post(`/CheckUser?projectId=${params}`); // 驗證是否為發起人
+
+// Match
+export const S_getApplicant = (params) => axiosInstance.get(`/GetApplicant?id=${params}`); // 取得申請人列表
+export const S_getApplicantInfo = (id, memberId) => axiosInstance.get(`/GetApplicantInfo?memberId=${memberId}&projectId=${id}`); // 取得申請人資料
+export const S_passApplicant = (id, memberId) => axiosInstance.post(`/PassApplicant?memberId=${memberId}&projectId=${id}`); // 通過申請人
+export const S_rejectApplicant = (id, memberId) => axiosInstance.post(`/RejectApplicant?memberId=${memberId}&projectId=${id}`); // 不通過申請人
+export const S_startProject = (params) => axiosInstance.post(`/StartProject?Id=${params}`); // 確認所有組員 開始專案
+export const S_attendProject = (params, data) => axiosInstance.post(`/AttendProject?Id=${params}`, data); // 參與專案
 
 // SuccessProject
 export const S_getSuccessProject = (params) => axiosInstance.get('/GetSuccessProject',params); // 取得已完成專案列表
@@ -56,4 +57,4 @@ export const S_getSuccessProjectDetail = (params) => axiosInstance.get(`/GetSucc
 export const S_getSussessProjectBanner = (params) => axiosInstance.get('/GetSussessProjectBanner',params); // 已完成的專案最新七筆 Banner
 export const S_uploadProjectBanner = (params) => axiosForm.post('/UploadProjectBanner',params); // 上傳專案 Banner
 export const S_uploadProjectPics = (params) => axiosForm.post('/UploadProjectPics',params); // 上傳專案 完成圖片（多圖）
-export const S_checkSussessProject = (params) => axiosInstance.post('/CheckSussessProject',params); // 確認專案完成並填寫完成資料
+export const S_checkSussessProject = (id, params) => axiosInstance.put(`/CheckSussessProject?ProjectId=${id}`, params); // 確認專案完成並填寫完成資料

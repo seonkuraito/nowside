@@ -1,9 +1,10 @@
 <script>
 import {
-  S_presentFavoriteProject,
   S_checkUser,
   S_getProjectDetail,
   S_getProjectMessage,
+  S_sendProjectMessage,
+  S_presentFavoriteProject,
   S_addFavoriteProject,
   S_cancelFavoriteProject,
 } from '@/http/api';
@@ -38,7 +39,7 @@ export default {
         Organizer: [], // 發起人資訊
         Applicants: [], // 參與人資訊
       },
-      messageParams: [
+      detailMessageParams: [
         {
           ProjectsId: 0,
           ProfilePicture: '',
@@ -48,6 +49,8 @@ export default {
           InitDate: '',
         },
       ],
+      messageTitle: '',
+      messageContent: '',
     };
   },
   computed: {},
@@ -89,7 +92,7 @@ export default {
     // 取得專案詳細
     getDetailParams() {
       S_getProjectDetail(this.projectId).then(res =>{
-        console.log('專案詳細', res.data.userdata);
+        console.log('取得專案詳細', res.data.userdata);
         this.detailParams = res.data.userdata;
       })
       .catch(error => {
@@ -99,8 +102,21 @@ export default {
     // 取得專案留言
     getMessageParams() {
       S_getProjectMessage(this.projectId).then(res =>{
-        console.log('專案留言', res.data.data);
-        this.messageParams = res.data.data;
+        console.log('取得專案留言', res.data.data);
+        if (res.data.data.length === 0) {
+          this.detailMessageParams = [];
+        } else {
+          this.detailMessageParams = res.data.data;
+        };
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    },
+    // 送出專案留言
+    postMessageParams() {
+      S_sendProjectMessage(this.projectId, this.messageTitle, this.messageContent).then(res =>{
+        console.log('送出專案留言', res.data);
       })
       .catch(error => {
         console.log(error);
@@ -112,7 +128,7 @@ export default {
       if (token) {
         S_addFavoriteProject(id).then(res =>{
           console.log('收藏專案', res.data);
-          this.getSaveListParams();
+          this.favoriteActive = true;
           this.getListParams();
         })
         .catch(error => {
@@ -127,7 +143,7 @@ export default {
       if (token) {
         S_cancelFavoriteProject(id).then(res =>{
           console.log('取消收藏專案', res.data);
-          this.getSaveListParams();
+          this.favoriteActive = false;
           this.getListParams();
         })
         .catch(error => {
@@ -279,14 +295,36 @@ export default {
             </p>
           </li>
           <!-- 分享 -->
-          <li class="mb-10">
+          <li class="flex items-center mb-10">
             <p class="inline-block mr-8 mb-4 text-lg font-medium text-C_blue-700 dark:text-C_blue-400">
-              分享
+              功能
             </p>
-            <div class="inline-block">
-              <button class="nowside-button-blue-md">
+            <div class="flex">
+              <!-- 複製連結 -->
+              <button class="mr-6 nowside-button-blue-md">
                 複製連結
               </button>
+              <!-- 審核組員 -->
+              <router-link
+                class="mr-6 nowside-button-blue-md"
+                :to="{ name: 'ProjectMatch', params: { projectId: projectId, } }"
+              >
+                審核組員
+              </router-link>
+              <!-- 參與專案 -->
+              <router-link
+                class="mr-6 nowside-button-blue-md"
+                :to="{ name: 'ProjectApply', params: { projectId: projectId, } }"
+              >
+                參與專案
+              </router-link>
+              <!-- 完成專案 -->
+              <router-link
+                class="mr-6 nowside-button-blue-md"
+                :to="{ name: 'CreateSuccess', params: { projectId: projectId, } }"
+              >
+                完成專案
+              </router-link>
             </div>
           </li>
           <!-- 參加人員 -->
@@ -334,21 +372,6 @@ export default {
                 </div>
               </li>
             </ul>
-            <!-- 審核申請人 + 參與專案 -->
-            <div class="flex">
-              <router-link
-                class="mr-6 nowside-button-blue-md"
-                :to="{ name: 'ProjectMatch', params: { projectId: projectId, } }"
-              >
-                審核組員 {{ `${detailParams.Applicants?.length} / ${detailParams.GroupNum}` }}
-              </router-link>
-              <router-link
-                class="nowside-button-blue-md"
-                :to="{ name: 'ProjectApply', params: { projectId: projectId, } }"
-              >
-                參與專案
-              </router-link>
-            </div>
           </li>
         </ul>
       </div>
@@ -364,7 +387,7 @@ export default {
         <!-- 列表 -->
         <ul>
           <li
-            v-for="message in messageParams"
+            v-for="message in detailMessageParams"
             :key="message.InitDate"
             class="mb-16"
           >
@@ -372,7 +395,7 @@ export default {
               <div class="flex flex-col justify-start items-center">
                 <div
                   class="mx-6 mb-2 w-[72px] h-[72px] rounded-full nowside-backgroundImage"
-                  :style="{ 'background-image': `url('http://sideprojectnow.rocket-coding.com/Upload/GroupPicture/${detailParams.ProfilePicture}')` }"
+                  :style="{ 'background-image': `url('http://sideprojectnow.rocket-coding.com/Upload/ProfilePicture/${message.ProfilePicture}')` }"
                 ></div>
                 <p class="text-sm text-C_blue-700 dark:text-C_blue-200">
                   {{ message.NickName }}
@@ -403,7 +426,7 @@ export default {
             >標題</label>
             <input
               id="title"
-              v-model="messageParams.title"
+              v-model="messageTitle"
               name="title" 
               type="text"
               class="nowside-input"
@@ -416,7 +439,7 @@ export default {
             >內容</label>
             <textarea
               id="content"
-              v-model="messageParams.content"
+              v-model="messageContent"
               class="nowside-textarea"
               name="content"
               rows="8"
@@ -427,7 +450,10 @@ export default {
       </div>
       <!-- 送出按鈕 -->
       <div class="flex justify-center">
-        <button class="nowside-button-blue-md">
+        <button
+          class="nowside-button-blue-md"
+          @click="postMessageParams"
+        >
           送出
         </button>
       </div>

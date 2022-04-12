@@ -1,4 +1,6 @@
 <script>
+import { S_updateProjectState } from '@/http/api';
+
 export default {
   name: 'Home',
   components: {},
@@ -8,7 +10,20 @@ export default {
     };
   },
   computed: {},
-  methods: {},
+  mounted() {
+    this.updateProjectState();
+  },
+  methods: {
+    // 更新專案狀態
+    updateProjectState() {
+      S_updateProjectState().then(res =>{
+        console.log('更新專案狀態', res.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    },
+  },
 }
 </script>
 
@@ -173,7 +188,7 @@ export default {
         </li>
         <!-- Dennis -->
         <li class="flex relative flex-col justify-between items-center w-[364px] h-[515px]">
-          <h3 class="flex justify-center items-center py-1 px-3 font-chillax text-lg font-medium text-C_blue-500 dark:text-C_blue-200 rounded-full border-[3px] border-[#FFBA7B]">
+          <h3 class="flex justify-center items-center py-1 px-3 w-full font-chillax text-lg font-medium text-C_blue-500 dark:text-C_blue-200 rounded-full border-[3px] border-[#FFBA7B]">
             <span class="mr-2 text-lg material-icons">mail_outline</span>
             <span class="select-all">seon.kuraito@gmail.com</span>
           </h3>
@@ -204,7 +219,7 @@ export default {
         </li>
         <!-- Clara -->
         <li class="flex relative flex-col justify-between items-center w-[364px] h-[515px]">
-          <h3 class="flex justify-center items-center py-1 px-3 font-chillax text-lg font-medium text-C_blue-500 dark:text-C_blue-200 rounded-full border-[3px] border-[#FF7B7B]">
+          <h3 class="flex justify-center items-center py-1 px-3 w-full font-chillax text-lg font-medium text-C_blue-500 dark:text-C_blue-200 rounded-full border-[3px] border-[#FF7B7B]">
             <span class="mr-2 text-lg material-icons">mail_outline</span>
             <span class="select-all">clara014789@gmail.com</span>
           </h3>

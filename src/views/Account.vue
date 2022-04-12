@@ -59,7 +59,7 @@ export default {
         <!-- 選單 -->
         <ul class="text-lg text-center text-C_blue-700 dark:text-C_blue-400">
           <!-- 暱稱 -->
-          <li class="mb-6 font-medium">
+          <li class="mb-6 text-xl font-medium">
             {{ accountParams.NickName }}
           </li>
           <!-- 個人資料 -->
@@ -374,7 +374,7 @@ export default {
             <textarea
               id="selfIntroduction"
               v-model="accountParams.SelfIntroduction"
-              class="nowside-textarea"
+              class="resize-none nowside-textarea"
               name="selfIntroduction"
               rows="5"
               maxlength="1000"

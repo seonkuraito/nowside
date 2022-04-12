@@ -158,6 +158,7 @@ export default {
       this.projectParams.FinishedDeadline = new Date(this.projectParams.FinishedDeadline).toISOString();
       S_addProject(this.projectParams).then(res =>{
         console.log('新增專案資料', res);
+        this.$router.push({ name: 'Project' });
       })
       .catch(error => {
         console.log(error);
@@ -223,7 +224,7 @@ export default {
                 id="projectTypeId"
                 v-model="projectParams.ProjectTypeId"
                 name="projectTypeId"
-                class="w-full tracking-wide text-C_blue-600 dark:text-C_blue-200 bg-C_gray-100 dark:bg-[#333333] rounded border-2 border-C_gray-300 focus:border-C_green-500 dark:border-C_gray-900 focus:ring-2 focus:ring-C_green-500 form-input"
+                class="w-full tracking-wide text-C_blue-600 dark:text-C_blue-200 bg-C_gray-100 dark:bg-[#333333] rounded border-2 border-C_gray-300 focus:border-C_green-500 dark:border-C_gray-900 focus:ring-2 focus:ring-C_green-500 form-select"
               >
                 <option
                   v-for="type in classData"
@@ -243,7 +244,7 @@ export default {
                 id="projectTypeId"
                 v-model="projectParams.GroupNum"
                 name="projectTypeId"
-                class="w-full tracking-wide text-C_blue-600 dark:text-C_blue-200 bg-C_gray-100 dark:bg-[#333333] rounded border-2 border-C_gray-300 focus:border-C_green-500 dark:border-C_gray-900 focus:ring-2 focus:ring-C_green-500 form-input"
+                class="w-full tracking-wide text-C_blue-600 dark:text-C_blue-200 bg-C_gray-100 dark:bg-[#333333] rounded border-2 border-C_gray-300 focus:border-C_green-500 dark:border-C_gray-900 focus:ring-2 focus:ring-C_green-500 form-select"
               >
                 <option
                   v-for="num in GroupNum"
@@ -349,14 +350,13 @@ export default {
           <span class="mr-1 material-icons">reply</span>
           取消
         </router-link>
-        <router-link
+        <button
           class="flex justify-center items-center py-2 w-[196px] text-lg font-bold text-white bg-C_green-500 hover:bg-C_green-400 rounded shadow-lg"
-          to="/project"
           @click="postProjectParams"
         >
           <span class="mr-1 material-icons">ios_share</span>
           發起專案
-        </router-link>
+        </button>
       </section>
     </div>
   </article>

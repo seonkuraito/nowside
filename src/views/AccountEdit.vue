@@ -93,6 +93,7 @@ export default {
     editAccountParams(){
       S_editUserInfo(this.accountParams).then(res =>{
         console.log('編輯會員資料', res.data);
+        this.$router.push({ name: 'Account' });
       })
       .catch(error => {
         console.log(error);

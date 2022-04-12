@@ -91,7 +91,7 @@ export default {
       if (token) {
         S_addFavoriteProject(id).then(res =>{
           console.log('收藏專案', res.data);
-          this.getSaveListParams();
+          this.favoriteActive = true;
           this.getListParams();
         })
         .catch(error => {
@@ -106,7 +106,7 @@ export default {
       if (token) {
         S_cancelFavoriteProject(id).then(res =>{
           console.log('取消收藏專案', res.data);
-          this.getSaveListParams();
+          this.favoriteActive = false;
           this.getListParams();
         })
         .catch(error => {
@@ -186,7 +186,7 @@ export default {
               </p>
             </div>
             <div class="flex items-center">
-              <span class="mr-1 text-xl text-orange-500 material-icons">adjust</span>
+              <span class="mr-1 text-xl text-C_green-500 material-icons">adjust</span>
               <p class="font-medium text-C_blue-700 dark:text-C_blue-200">
                 {{ detailParams.ProjectState }}
               </p>

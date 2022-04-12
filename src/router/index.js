@@ -47,8 +47,9 @@ const router = createRouter({
       component: Create,
     },
     {
-      path: '/createsuccess',
+      path: '/createsuccess/:projectId',
       name: 'CreateSuccess',
+      props: (route) => ({ projectId: route.params.projectId }),
       component: () => import('../views/CreateSuccess.vue'),
     },
     {

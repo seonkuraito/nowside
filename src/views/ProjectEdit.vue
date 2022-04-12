@@ -176,6 +176,7 @@ export default {
       this.detailParams.FinishedDeadline = new Date(this.detailParams.FinishedDeadline).toISOString();
       S_editProject(this.projectId, this.detailParams).then(res =>{
         console.log('編輯專案詳細內容', res.data);
+        this.$router.push({ name: 'ProjectView', params: { projectId: this.projectId, },});
       })
       .catch(error => {
         console.log(error);
@@ -237,7 +238,7 @@ export default {
       <!-- 專案詳細 -->
       <section>
         <ul>
-          <!-- 專案種類 select + 團隊人數 select -->
+          <!-- 專案種類 + 團隊人數 -->
           <li class="flex flex-nowrap justify-between mb-12 h-[40px]">
             <form class="flex justify-between items-center w-[570px]">
               <label
@@ -248,7 +249,7 @@ export default {
                 id="projectTypeId"
                 v-model="detailParams.ProjectTypeId"
                 name="projectTypeId"
-                class="w-full tracking-wide text-C_blue-600 dark:text-C_blue-200 bg-C_gray-100 dark:bg-[#333333] rounded border border-C_gray-300 focus:border-C_green-500 dark:border-C_gray-900 focus:ring-C_green-500 form-input"
+                class="w-full tracking-wide text-C_blue-600 dark:text-C_blue-200 bg-C_gray-100 dark:bg-[#333333] rounded border border-C_gray-300 focus:border-C_green-500 dark:border-C_gray-900 focus:ring-C_green-500 form-select"
               >
                 <option
                   v-for="type in classData"
@@ -269,7 +270,7 @@ export default {
                 id="projectTypeId"
                 v-model="detailParams.GroupNum"
                 name="projectTypeId"
-                class="w-full tracking-wide text-C_blue-600 dark:text-C_blue-200 bg-C_gray-100 dark:bg-[#333333] rounded border-2 border-C_gray-300 focus:border-C_green-500 dark:border-C_gray-900 focus:ring-2 focus:ring-C_green-500 form-input"
+                class="w-full tracking-wide text-C_blue-600 dark:text-C_blue-200 bg-C_gray-100 dark:bg-[#333333] rounded border-2 border-C_gray-300 focus:border-C_green-500 dark:border-C_gray-900 focus:ring-2 focus:ring-C_green-500 form-select"
               >
                 <option
                   v-for="num in GroupNum"
@@ -375,14 +376,13 @@ export default {
           <span class="mr-1 material-icons">reply</span>
           取消
         </router-link>
-        <router-link
+        <button
           class="flex justify-center items-center py-2 w-[196px] text-lg font-bold text-white bg-C_green-500 hover:bg-C_green-400 rounded shadow-lg"
-          :to="{ name: 'ProjectView', params: { projectId: projectId, }, }"
           @click="putProjectParams"
         >
           <span class="mr-1 material-icons">ios_share</span>
           儲存
-        </router-link>
+        </button>
       </section>
     </div>
   </article>

@@ -1,13 +1,14 @@
 <script>
 import {
+  S_updateProjectState,
   S_getSaveProject,
-  S_getSaveProjectNoPage,
   S_getAllProject,
   S_getAllProjectNoPage,
   S_getAllProjectGuest,
   S_getAllProjectGuestNoPage,
   S_getSkills,
   S_getProjectClass,
+  S_getSaveProjectNoPage,
   S_addFavoriteProject,
   S_cancelFavoriteProject,
 } from '@/http/api';
@@ -18,7 +19,18 @@ export default {
   components: {},
   data() {
     return {
-      favoriteActive: false,
+      skillsData: [
+        {
+          Id: 0,
+          skill: '',
+        },
+      ],
+      classData: [
+        {
+          Id: 0,
+          ProjectType: '',
+        },
+      ],
       listParams: [
         {
           Id: 0,
@@ -49,27 +61,26 @@ export default {
           ProjectState: '',
         },
       ],
-      skillsData: [
-        {
-          Id: 0,
-          skill: '',
-        },
-      ],
-      classData: [
-        {
-          Id: 0,
-          ProjectType: '',
-        },
-      ],
+      favoriteActive: false,
     };
   },
   computed: {},
   mounted() {
+    this.updateProjectState();
     this.onLogin();
     this.getSkillsParams();
     this.getClassParams();
   },
   methods: {
+    // 更新專案狀態
+    updateProjectState() {
+      S_updateProjectState().then(res =>{
+        console.log('更新專案狀態', res.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    },
     // 判斷有無登入（token）
     onLogin() {
       const token = localStorage.getItem('nowsideToken');
@@ -262,7 +273,7 @@ export default {
       </div>
     </section>
     <!-- 分類標籤 -->
-    <section class="mb-[32px] nowside-container-lg">
+    <!-- <section class="mb-[32px] nowside-container-lg">
       <ul class="flex justify-end">
         <li>
           <button class="text-lg text-C_blue-700 hover:text-C_blue-500 dark:text-C_blue-200 dark:hover:text-C_blue-300">
@@ -280,7 +291,7 @@ export default {
           </button>
         </li>
       </ul>
-    </section>
+    </section> -->
     <!-- 列表區塊 -->
     <div class="flex justify-between nowside-container-lg">
       <!-- 收藏專案 -->
@@ -296,7 +307,10 @@ export default {
               v-for="project in favoriteListParams"
               :key="project.Id"
             >
-              <button class="flex items-center p-2 mb-8 text-left hover:bg-C_blue-200 dark:hover:bg-[#333333] rounded-lg">
+              <router-link
+                class="flex items-center p-2 mb-8 text-left hover:bg-C_blue-100 dark:hover:bg-[#333333] rounded-lg"
+                :to="{ name: 'ProjectView', params: { projectId: project.Id, } }"
+              >
                 <div
                   class="min-w-[80px] min-h-[80px] bg-C_gray-100 dark:bg-[#333333] rounded-full nowside-backgroundImage"
                   :style="{ 'background-image': `url('http://sideprojectnow.rocket-coding.com/Upload/GroupPicture/${project.GroupPhoto}')` }"
@@ -306,7 +320,7 @@ export default {
                     {{ project.ProjectName }}
                   </p>
                 </div>
-              </button>
+              </router-link>
             </li>
           </ul>
         </div>
@@ -328,16 +342,16 @@ export default {
           <div class="mr-6 w-[482px]">
             <ul class="text-C_blue-800">
               <!-- 專案名稱 -->
-              <li class="mb-4">
+              <li class="mb-6">
                 <p class="text-xl font-medium text-C_blue-700 dark:text-C_blue-400">
                   {{ project.ProjectName }}
                 </p>
               </li>
               <!-- 專案內容 -->
               <li class="mb-6">
-                <p class="mb-1 text-lg font-medium text-C_blue-700 dark:text-C_blue-400">
+                <p class="mb-2 text-lg font-medium text-C_blue-700 dark:text-C_blue-400">
                   專案內容
-                </p><br>
+                </p>
                 <p class="overflow-y-hidden h-[160px] dark:text-C_blue-200">
                   {{ project.ProjectContext }}
                 </p>
@@ -368,7 +382,10 @@ export default {
                   </p>
                 </div>
                 <div class="flex items-center">
-                  <span class="mr-1 text-xl text-orange-500 material-icons">adjust</span>
+                  <span
+                    class="mr-1 text-xl text-orange-500 material-icons"
+                    :class="{ 'text-C_green-500': project.ProjectState === '進行中', 'text-C_gray-900': project.ProjectState === '已關閉' }"
+                  >adjust</span>
                   <p class="font-medium text-C_blue-700 dark:text-C_blue-200">
                     {{ project.ProjectState }}
                   </p>

@@ -57,6 +57,7 @@ export default {
         },
       ],
       tableStatus: false,
+      tableId: '',
       userStatus: 'userInfo',
     };
   },
@@ -88,7 +89,11 @@ export default {
     },
     // 取得申請人資料
     getApplicantParams(projectId, memberId) {
-      this.tableStatus = !this.tableStatus;
+      if (this.tableId === memberId) {
+        this.tableId = '';
+        return;
+      };
+      this.tableId = memberId;
       if (this.tableStatus === false) this.applicantParams = {};
 
       S_getApplicantInfo(projectId, memberId).then(res =>{
@@ -128,7 +133,7 @@ export default {
     },
     // 時間格式
     timeFormat(date) {
-      const time = moment(date).format('YYYY.MM.DD');
+      const time = moment(date).format('YYYY/MM/DD');
       return time;
     },
   },
@@ -187,7 +192,7 @@ export default {
               <span>{{ list.NickName }}</span>
             </td>
             <!-- 留言 -->
-            <td class="py-6 text-left">
+            <td class="py-6 text-center">
               <span>{{ list.ApplicantMessage }}</span>
             </td>
             <!-- 查看 -->
@@ -201,7 +206,7 @@ export default {
             </td>
           </tr>
           <!-- 收合選單 -->
-          <template v-if="tableStatus === true">
+          <template v-if="list.MembersId === tableId">
             <tr
               v-for="applicant in applicantParams"
               :key="applicant.Account"
@@ -213,7 +218,7 @@ export default {
                   <div class="flex flex-col">                    
                     <div
                       class="mt-[108px] ml-[40px] w-[344px] h-[344px] rounded-full shadow-xl dark:shadow-gray-800 nowside-backgroundImage"
-                      :style="{ 'background-image': `url('http://sideprojectnow.rocket-coding.com/Upload/ProfilePicture/${applicantParams.ProfilePicture}')` }"
+                      :style="{ 'background-image': `url('http://sideprojectnow.rocket-coding.com/Upload/ProfilePicture/${applicant.ProfilePicture}')` }"
                     ></div>
                   </div>
                   <!-- 欄位區塊 -->
@@ -477,7 +482,7 @@ export default {
                           >技能</label>
                           <div class="p-2 w-full h-[140px] text-lg text-C_blue-600 bg-C_gray-100 dark:bg-[#333333] rounded border border-C_gray-300">
                             <div
-                              v-for="skill in applicant"
+                              v-for="skill in applicant.Skills"
                               :key="skill.Id"
                               class="inline-block mr-4 bg-C_blue-200 rounded"
                             >

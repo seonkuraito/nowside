@@ -1,5 +1,9 @@
 <script>
 import {
+  S_getSaveProject,
+  S_getSaveProjectNoPage,
+  S_addFavoriteProject,
+  S_cancelFavoriteProject,
   S_getUserInfo,
   S_getAddProject,
   S_getAddProjectNoPage,
@@ -7,8 +11,6 @@ import {
   S_getApplyProjectNoPage,
   S_getAttendProject,
   S_getAttendProjectNoPage,
-  S_getSaveProject,
-  S_getSaveProjectNoPage,
 } from '@/http/api';
 import moment from 'moment';
 
@@ -57,6 +59,22 @@ export default {
           ApplicantState: '', // 申請人的專案狀態
         },
       ],
+      favoriteListParams: [
+        {
+          Id: 0,
+          ProjectName: '',
+          ProjectContext: '',
+          GroupPhoto: '',
+          InitDate: '',
+          GroupDeadline: '',
+          FinishedDeadline: '',
+          GroupNum: 0,
+          PartnerSkills: [],
+          ProjectTypeId: [],
+          ProjectState: '',
+        },
+      ],
+      favoriteActive: false,
     };
   },
   computed: {},
@@ -78,6 +96,17 @@ export default {
     };
   },
   methods: {
+    // 取得收藏的專案資料
+    getSaveListParams() {
+      S_getSaveProjectNoPage().then(res =>{
+        console.log('收藏的專案資料', res.data.data);
+        this.favoriteActive = true;
+        this.listParams = res.data.data;
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    },
     // 取得會員資料
     getAccountParams() {
       S_getUserInfo().then(res =>{
@@ -118,15 +147,35 @@ export default {
         console.log(error);
       });
     },
-    // 取得收藏的專案資料
-    getSaveListParams() {
-      S_getSaveProjectNoPage().then(res =>{
-        console.log('收藏的專案資料', res.data.data);
-        this.listParams = res.data.data;
-      })
-      .catch(error => {
-        console.log(error);
-      });
+    // 收藏專案
+    addFavorite(id) {
+      const token = localStorage.getItem('nowsideToken');
+      if (token) {
+        S_addFavoriteProject(id).then(res =>{
+          console.log('收藏專案', res.data);
+          this.getSaveListParams();
+          this.getListParams();
+        })
+        .catch(error => {
+          console.log(error);
+        });
+      };
+      return;
+    },
+    // 取消收藏專案
+    cancelFavorite(id) {
+      const token = localStorage.getItem('nowsideToken');
+      if (token) {
+        S_cancelFavoriteProject(id).then(res =>{
+          console.log('取消收藏專案', res.data);
+          this.getSaveListParams();
+          this.getListParams();
+        })
+        .catch(error => {
+          console.log(error);
+        });
+      };
+      return;
     },
     // 時間格式
     timeFormat(date) {
@@ -150,7 +199,7 @@ export default {
         <!-- 選單 -->
         <ul class="text-lg text-center text-C_blue-700 dark:text-C_blue-400">
           <!-- 暱稱 -->
-          <li class="mb-6 font-medium">
+          <li class="mb-6 text-xl font-medium">
             {{ accountParams.NickName }}
           </li>
           <!-- 個人資料 -->
@@ -310,19 +359,28 @@ export default {
               <li>
                 <div class="flex justify-between w-full">
                   <button
-                    class="flex justify-center items-center py-2 px-6 text-md font-medium text-C_blue-700 bg-white hover:bg-C_gray-100 rounded border-2 border-C_gray-300"
+                    v-if="project.CollectOrNot === false"
+                    class="flex justify-center items-center py-2 px-6 text-md font-medium text-C_blue-400 bg-white hover:bg-C_gray-100 rounded border-2 border-C_gray-300" 
                     @click="addFavorite(project.Id)"
                   >
                     <span class="mr-1 material-icons">favorite_border</span>
                     收藏
                   </button>
                   <button
+                    v-if="project.CollectOrNot === true"
+                    class="flex justify-center items-center py-2 px-6 text-md font-medium text-C_blue-700 bg-white hover:bg-C_gray-100 rounded border-2 border-C_gray-300" 
+                    @click="cancelFavorite(project.Id)"
+                  >
+                    <span class="mr-1 material-icons">favorite</span>
+                    收藏
+                  </button>
+                  <router-link
                     class="flex justify-center items-center py-2 px-6 text-md font-medium text-white bg-C_green-500 hover:bg-C_green-400 rounded"
-                    @click="goProjectView(project.Id)"
+                    :to="{ name: 'ProjectView', params: { projectId: project.Id, } }"
                   >
                     <span class="mr-1 material-icons">north_east</span>
                     查看
-                  </button>
+                  </router-link>
                 </div>
               </li>
             </ul>

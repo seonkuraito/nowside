@@ -14,8 +14,8 @@ export default {
     return {
       attendParams: {
         ApplicantState: '',
-        // ApplicantMessage: '',
-        // ApplicantSelfIntro: '',
+        ApplicantMessage: '',
+        ApplicantSelfIntro: '',
         MembersId: 0,
         ProjectsId: 0,
         InitDate: null,
@@ -28,6 +28,7 @@ export default {
     postAttendParams(){
       S_attendProject(this.projectId, this.attendParams).then(res =>{
         console.log('參與專案', res.data);
+        this.$router.push({ name: 'ProjectView', params: { projectId: this.projectId, },});
       })
       .catch(error => {
         console.log(error);
@@ -53,6 +54,7 @@ export default {
       </h2>
       <!-- 留言 + 自我介紹 -->
       <ul class="mb-14 w-full">
+        <!-- 留言 -->
         <li class="mb-12">
           <form class="flex justify-between items-center">
             <label
@@ -69,6 +71,7 @@ export default {
             ></textarea>
           </form>
         </li>
+        <!-- 自我介紹 -->
         <li>
           <form class="flex justify-between items-center">
             <label
