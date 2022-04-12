@@ -8,7 +8,7 @@ import {
   S_getSuccessProjectGuestNoPage,
   S_getSkills,
   S_getProjectClass,
-  S_getSaveProjectNoPage,
+  S_getCollectSuccessProject,
   S_addFavoriteProject,
   S_cancelFavoriteProject,
 } from '@/http/api';
@@ -94,7 +94,7 @@ export default {
     },
     // 取得收藏的專案資料
     getSaveListParams() {
-      S_getSaveProjectNoPage().then(res =>{
+      S_getCollectSuccessProject().then(res =>{
         console.log('收藏的專案資料', res.data.data);
         this.favoriteActive = true;
         this.favoriteListParams = res.data.data;
@@ -151,6 +151,12 @@ export default {
           console.log('收藏專案', res.data);
           this.getSaveListParams();
           this.getListParams();
+
+          this.$notify({
+            group: "foo",
+            title: "Success",
+            text: "收藏成功，專案已成功儲存。"
+          }, 3500)
         })
         .catch(error => {
           console.log(error);
@@ -166,6 +172,12 @@ export default {
           console.log('取消收藏專案', res.data);
           this.getSaveListParams();
           this.getListParams();
+
+          this.$notify({
+            group: "foo",
+            title: "Success",
+            text: "取消收藏，專案已成功移除。"
+          }, 3500)
         })
         .catch(error => {
           console.log(error);

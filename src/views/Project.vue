@@ -8,7 +8,7 @@ import {
   S_getAllProjectGuestNoPage,
   S_getSkills,
   S_getProjectClass,
-  S_getSaveProjectNoPage,
+  S_getAllCollectProject,
   S_addFavoriteProject,
   S_cancelFavoriteProject,
 } from '@/http/api';
@@ -94,7 +94,7 @@ export default {
     },
     // 取得收藏的專案資料
     getSaveListParams() {
-      S_getSaveProjectNoPage().then(res =>{
+      S_getAllCollectProject().then(res =>{
         console.log('收藏的專案資料', res.data.data);
         this.favoriteActive = true;
         this.favoriteListParams = res.data.data;

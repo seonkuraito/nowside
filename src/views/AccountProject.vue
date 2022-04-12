@@ -284,15 +284,15 @@ export default {
           <!-- 【中】內容 -->
           <div class="mr-6 w-[482px]">
             <ul class="text-C_blue-800">
-              <li class="mb-4">
+              <li class="mb-6">
                 <p class="text-xl font-medium text-C_blue-700 dark:text-C_blue-400">
                   {{ project.ProjectName }}
                 </p>
               </li>
               <li class="mb-6">
-                <p class="mb-1 text-lg font-medium text-C_blue-700 dark:text-C_blue-400">
+                <p class="mb-2 text-lg font-medium text-C_blue-700 dark:text-C_blue-400">
                   專案內容
-                </p><br>
+                </p>
                 <p class="overflow-y-hidden h-[160px] dark:text-C_blue-200">
                   {{ project.ProjectContext }}
                 </p>
@@ -317,14 +317,32 @@ export default {
                   :key="type.Id"
                   class="flex items-center"
                 >
-                  <p class="max-w-[144px] font-medium text-C_blue-500 dark:text-C_blue-200 truncate">
+                  <p class="max-w-[144px] font-medium text-C_blue-500 dark:text-C_blue-200 truncate border-b-2 border-C_blue-300 dark:border-C_blue-200">
                     {{ type.ProjectType }}
                   </p>
                 </div>
-                <div class="flex items-center">
-                  <span class="mr-1 text-xl text-orange-500 material-icons">adjust</span>
+                <div
+                  v-if="project.ProjectState !== null"
+                  class="flex items-center"
+                >
+                  <span
+                    class="mr-1 text-xl material-icons"
+                    :class="{ 'text-orange-500': project.ProjectState === '媒合中', 'text-C_green-500': project.ProjectState === '進行中', 'text-C_green-500': project.ProjectState === '已完成', 'text-C_gray-900': project.ProjectState === '已關閉' }"
+                  >adjust</span>
                   <p class="font-medium text-C_blue-700 dark:text-C_blue-200">
                     {{ project.ProjectState }}
+                  </p>
+                </div>
+                <div
+                  v-if="project.ProjectState === null && project.ApplicantState"
+                  class="flex items-center"
+                >
+                  <span
+                    class="mr-1 text-xl material-icons"
+                    :class="{ 'text-orange-500': project.ApplicantState === '審核中', 'text-C_green-500': project.ApplicantState === '已通過', 'text-C_red': project.ApplicantState === '未通過' }"
+                  >adjust</span>
+                  <p class="font-medium text-C_blue-700 dark:text-C_blue-200">
+                    {{ project.ApplicantState }}
                   </p>
                 </div>
               </li>

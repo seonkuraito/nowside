@@ -35,6 +35,7 @@ export const S_getAllProject = (params) => axiosInstance.get('/GetAllProject',pa
 export const S_getAllProjectNoPage = (params) => axiosInstance.get('/GetAllProjectNoPage',params); // 取得所有專案列表（無分頁）
 export const S_getAllProjectGuest = (params) => axiosInstance.get('/GetAllProjectGuest',params); // 取得所有專案列表【無登入】
 export const S_getAllProjectGuestNoPage = (params) => axiosInstance.get('/GetAllProjectGuestNoPage',params); // 取得所有專案列表【無登入】（無分頁）
+export const S_getAllCollectProject = (params) => axiosInstance.get('/GetAllCollectProject',params); // 取得收藏的專案列表
 export const S_getProjectDetail = (params) => axiosInstance.get(`/GetProjectDetail?Id=${params}`); // 取得專案詳細內容
 export const S_getProjectMessage = (params) => axiosInstance.get(`/GetProjectMessage?projectId=${params}`); // 取得專案留言內容
 export const S_sendProjectMessage = (id, title, content) => axiosForm.post(`/SendProjectMessage?projectId=${id}&title=${title}&messageContent=${content}`); // 送出專案留言
@@ -57,6 +58,7 @@ export const S_getSuccessProject = (params) => axiosInstance.get('/GetSuccessPro
 export const S_getSuccessProjectNoPage = (params) => axiosInstance.get('/GetSuccessProjectNoPage',params); // 取得已完成專案列表（無分頁）
 export const S_getSuccessProjectGuest = (params) => axiosInstance.get('/GetSuccessProjectGuest',params); // 取得已完成專案列表【無登入】
 export const S_getSuccessProjectGuestNoPage = (params) => axiosInstance.get('/GetSuccessProjectGuestNoPage',params); // 取得已完成專案列表【無登入】（無分頁）
+export const S_getCollectSuccessProject = (params) => axiosInstance.get('/GetCollectSuccessProject',params); // 會員取得已完成的收藏
 export const S_getSuccessProjectDetail = (params) => axiosInstance.get(`/GetSuccessProjectDetail?projectId=${params}`); // 取得已完成專案詳細內容
 export const S_getSussessProjectBanner = (params) => axiosInstance.get('/GetSussessProjectBanner',params); // 已完成的專案最新七筆 Banner
 export const S_uploadProjectBanner = (params) => axiosForm.post('/UploadProjectBanner',params); // 上傳專案 Banner
