@@ -1,7 +1,6 @@
 <script>
 import {
   S_updateProjectState,
-  S_getSaveProject,
   S_getSuccessProject,
   S_getSuccessProjectNoPage,
   S_getSuccessProjectGuest,
@@ -113,10 +112,10 @@ export default {
         console.log(error);
       });
     },
-    // 取得所有專案列表
+    // 取得已完成專案列表
     getGuestListParams() {
       S_getSuccessProjectGuestNoPage().then(res =>{
-        console.log('取得所有專案列表', res.data.data);
+        console.log('取得已完成專案列表', res.data.data);
         this.listParams = res.data.data;
       })
       .catch(error => {
@@ -208,7 +207,7 @@ export default {
     <section class="flex flex-col justify-center items-center py-12 mb-24 h-[232px] nowside-container-lg nowside-shadow">
       <div class="w-[1076px]">
         <!-- 搜尋 input -->
-        <label class="block relative">
+        <label class="block relative mb-10">
           <span class="flex absolute inset-y-0 left-0 items-center pl-2">
             <span
               class="ml-12 text-3xl text-C_green-500 material-icons"
@@ -222,7 +221,7 @@ export default {
           >
         </label>
         <!-- 搜尋條件 select -->
-        <!-- <form>
+        <form>
           <select
             id="skillsData"
             class="nowside-searchSelect"
@@ -285,7 +284,7 @@ export default {
               {{ skill.skill }}
             </option>
           </select>
-        </form> -->
+        </form>
       </div>
     </section>
     <!-- 列表區塊 -->
@@ -413,7 +412,7 @@ export default {
                   <div
                     v-for="skill in project.PartnerSkills"
                     :key="skill.Id"
-                    class="inline-block mr-2 mb-4 bg-C_blue-200 rounded"
+                    class="inline-block mr-2 mb-4 bg-C_blue-200 rounded dark:opacity-30"
                   >
                     <p class="px-4">
                       {{ skill.skill }}
@@ -426,7 +425,7 @@ export default {
                 <div class="flex justify-between w-full">
                   <button
                     v-if="project.CollectOrNot === false"
-                    class="flex justify-center items-center py-2 px-6 text-md font-medium text-C_blue-400 bg-white hover:bg-C_gray-100 rounded border-2 border-C_gray-300" 
+                    class="flex justify-center items-center py-2 px-6 text-md font-medium text-C_blue-400 bg-white hover:bg-C_gray-100 rounded border-2 border-C_gray-300 dark:opacity-30" 
                     @click="addFavorite(project.Id)"
                   >
                     <span class="mr-1 material-icons">favorite_border</span>
@@ -434,14 +433,14 @@ export default {
                   </button>
                   <button
                     v-if="project.CollectOrNot === true"
-                    class="flex justify-center items-center py-2 px-6 text-md font-medium text-C_blue-700 bg-white hover:bg-C_gray-100 rounded border-2 border-C_gray-300" 
+                    class="flex justify-center items-center py-2 px-6 text-md font-medium text-C_blue-700 bg-white hover:bg-C_gray-100 rounded border-2 border-C_gray-300 dark:opacity-30" 
                     @click="cancelFavorite(project.Id)"
                   >
                     <span class="mr-1 material-icons">favorite</span>
                     收藏
                   </button>
                   <router-link
-                    class="flex justify-center items-center py-2 px-6 text-md font-medium text-white bg-C_green-500 hover:bg-C_green-400 rounded"
+                    class="flex justify-center items-center py-2 px-6 text-md font-medium text-white bg-C_green-500 hover:bg-C_green-400 rounded dark:opacity-80"
                     :to="{ name: 'SuccessView', params: { successId: project.Id, } }"
                   >
                     <span class="mr-1 material-icons">north_east</span>

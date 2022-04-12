@@ -375,7 +375,7 @@ export default {
                   <div
                     v-for="skill in project.PartnerSkills"
                     :key="skill.Id"
-                    class="inline-block mr-2 mb-4 bg-C_blue-200 rounded"
+                    class="inline-block mr-2 mb-4 bg-C_blue-200 rounded dark:opacity-30"
                   >
                     <p class="px-4">
                       {{ skill.skill }}
@@ -388,7 +388,7 @@ export default {
                 <div class="flex justify-between w-full">
                   <button
                     v-if="project.CollectOrNot === false"
-                    class="flex justify-center items-center py-2 px-6 text-md font-medium text-C_blue-400 bg-white hover:bg-C_gray-100 rounded border-2 border-C_gray-300" 
+                    class="flex justify-center items-center py-2 px-6 text-md font-medium text-C_blue-400 bg-white hover:bg-C_gray-100 rounded border-2 border-C_gray-300 dark:opacity-30" 
                     @click="addFavorite(project.Id)"
                   >
                     <span class="mr-1 material-icons">favorite_border</span>
@@ -396,14 +396,14 @@ export default {
                   </button>
                   <button
                     v-if="project.CollectOrNot === true"
-                    class="flex justify-center items-center py-2 px-6 text-md font-medium text-C_blue-700 bg-white hover:bg-C_gray-100 rounded border-2 border-C_gray-300" 
+                    class="flex justify-center items-center py-2 px-6 text-md font-medium text-C_blue-700 bg-white hover:bg-C_gray-100 rounded border-2 border-C_gray-300 dark:opacity-30" 
                     @click="cancelFavorite(project.Id)"
                   >
                     <span class="mr-1 material-icons">favorite</span>
                     收藏
                   </button>
                   <router-link
-                    class="flex justify-center items-center py-2 px-6 text-md font-medium text-white bg-C_green-500 hover:bg-C_green-400 rounded"
+                    class="flex justify-center items-center py-2 px-6 text-md font-medium text-white bg-C_green-500 hover:bg-C_green-400 rounded dark:opacity-80"
                     :to="{ name: 'ProjectView', params: { projectId: project.Id, } }"
                   >
                     <span class="mr-1 material-icons">north_east</span>

@@ -57,7 +57,7 @@ export const S_restartProject = (id) => axiosInstance.post(`/RestartProject?proj
 export const S_getSuccessProject = (params) => axiosInstance.get('/GetSuccessProject',params); // 取得已完成專案列表
 export const S_getSuccessProjectNoPage = (params) => axiosInstance.get('/GetSuccessProjectNoPage',params); // 取得已完成專案列表（無分頁）
 export const S_getSuccessProjectGuest = (params) => axiosInstance.get('/GetSuccessProjectGuest',params); // 取得已完成專案列表【無登入】
-export const S_getSuccessProjectGuestNoPage = (params) => axiosInstance.get('/GetSuccessProjectGuestNoPage',params); // 取得已完成專案列表【無登入】（無分頁）
+export const S_getSuccessProjectGuestNoPage = (params) => axiosInstance.get('/GetSuccessProjectGuestNoPage?page=0',params); // 取得已完成專案列表【無登入】（無分頁）
 export const S_getCollectSuccessProject = (params) => axiosInstance.get('/GetCollectSuccessProject',params); // 會員取得已完成的收藏
 export const S_getSuccessProjectDetail = (params) => axiosInstance.get(`/GetSuccessProjectDetail?projectId=${params}`); // 取得已完成專案詳細內容
 export const S_getSussessProjectBanner = (params) => axiosInstance.get('/GetSussessProjectBanner',params); // 已完成的專案最新七筆 Banner

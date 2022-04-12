@@ -121,7 +121,7 @@ export default {
             STEP2 <span class="font-sans text-xl font-medium text-C_green-500">等待媒合</span>
           </h3>
           <p class="text-center text-C_blue-700 dark:text-C_blue-200">
-            點擊參與專案後請靜待待媒合結果，<br>
+            點擊參與專案後請靜待媒合結果，<br>
             點擊<span class="text-C_blue-400">會員中心的通知列表</span>可以查看專案進度。
           </p>
         </li>

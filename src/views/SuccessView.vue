@@ -181,8 +181,7 @@ export default {
                 class="flex justify-center items-center py-2 px-6 text-md font-medium text-white bg-C_green-500 hover:bg-C_green-400 rounded"
                 :to="{ name: 'ProjectView', params: { projectId: detailParams.Id, }, hash: '#XXX' }"
               >
-                <span class="mr-1 material-icons">north_east</span>
-                前往
+                前往專案
               </router-link>
             </div>
           </li>
@@ -284,7 +283,7 @@ export default {
               <div
                 v-for="skill in detailParams.PartnerSkills"
                 :key="skill.Id"
-                class="inline-block mr-2 mb-4 bg-C_blue-200 rounded"
+                class="inline-block mr-2 mb-4 bg-C_blue-200 rounded dark:opacity-30"
               >
                 <p class="px-4">
                   {{ skill.skill }}
@@ -294,11 +293,12 @@ export default {
           </li>
           <!-- 分享 -->
           <li class="mb-10">
-            <p class="inline-block mr-8 mb-4 text-lg font-medium text-C_blue-700 dark:text-C_blue-400">
+            <p class="inline-block mr-8 mb-4 text-lg font-medium text-C_blue-700 dark:text-C_blue-400 dark:opacity-80">
               分享
             </p>
             <div class="inline-block">
               <button class="nowside-button-blue-md">
+                <span class="mr-1 material-icons">content_copy</span>
                 複製連結
               </button>
             </div>

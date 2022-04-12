@@ -350,14 +350,14 @@ export default {
       <!-- 按鈕 -->
       <section class="flex justify-center">
         <router-link
-          class="flex justify-center items-center py-2 mr-6 w-[196px] text-lg font-bold text-C_blue-700 bg-white hover:bg-C_gray-100 rounded border-2 border-C_blue-400 shadow-lg"
+          class="flex justify-center items-center py-2 mr-6 w-[196px] text-lg font-bold text-C_blue-700 bg-white hover:bg-C_gray-100 rounded border-2 border-C_blue-400 shadow-lg dark:opacity-30"
           to="/"
         >
           <span class="mr-1 material-icons">reply</span>
           取消
         </router-link>
         <button
-          class="flex justify-center items-center py-2 w-[196px] text-lg font-bold text-white bg-C_green-500 hover:bg-C_green-400 rounded shadow-lg"
+          class="flex justify-center items-center py-2 w-[196px] text-lg font-bold text-white bg-C_green-500 hover:bg-C_green-400 rounded shadow-lg dark:opacity-80"
           @click="postProjectParams"
         >
           <span class="mr-1 material-icons">ios_share</span>

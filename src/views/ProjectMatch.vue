@@ -507,7 +507,7 @@ export default {
                             <div
                               v-for="skill in applicant.Skills"
                               :key="skill.Id"
-                              class="inline-block mr-4 bg-C_blue-200 rounded"
+                              class="inline-block mr-4 bg-C_blue-200 rounded dark:opacity-30"
                             >
                               <p class="px-4">
                                 {{ skill.skill }}
@@ -539,21 +539,15 @@ export default {
                 <!-- 通過未通過按鈕 -->
                 <div class="flex justify-center">
                   <button
-                    class="py-2 mr-6 w-32 text-lg font-medium text-C_blue-700 bg-white hover:bg-C_gray-100 rounded border-2 border-C_blue-400"
+                    class="py-2 mr-6 w-32 text-lg font-medium text-C_blue-700 bg-white hover:bg-C_gray-100 rounded border-2 border-C_blue-400 dark:opacity-30"
                     @click="postReject(projectId, list.MembersId)"
                   >
-                    <span class="align-sub material-icons">
-                      close
-                    </span>
                     未通過
                   </button>
                   <button
-                    class="py-2 w-32 text-lg font-medium text-white bg-C_green-500 hover:bg-C_green-400 rounded"
+                    class="py-2 w-32 text-lg font-medium text-white bg-C_green-500 hover:bg-C_green-400 rounded dark:opacity-80"
                     @click="postPass(projectId, list.MembersId)"
                   >
-                    <span class="align-sub material-icons">
-                      done
-                    </span>
                     通過
                   </button>
                 </div>
@@ -566,14 +560,14 @@ export default {
     <!-- 按鈕 -->
     <section class="flex justify-center">
       <router-link
-        class="flex justify-center items-center py-2 mr-6 w-[196px] text-lg font-bold text-C_blue-700 bg-white hover:bg-C_gray-100 rounded border-2 border-C_blue-400 shadow-lg"
+        class="flex justify-center items-center py-2 mr-6 w-[196px] text-lg font-bold text-C_blue-700 bg-white hover:bg-C_gray-100 rounded border-2 border-C_blue-400 shadow-lg dark:opacity-30"
         :to="{ name: 'ProjectView', params: { projectId: projectId, }, }"
       >
         <span class="align-sub material-icons">reply</span>
         回上一步
       </router-link>
       <button
-        class="flex justify-center items-center py-2 w-[196px] text-lg font-bold text-white bg-C_green-500 hover:bg-C_green-400 rounded shadow-lg"
+        class="flex justify-center items-center py-2 w-[196px] text-lg font-bold text-white bg-C_green-500 hover:bg-C_green-400 rounded shadow-lg dark:opacity-80"
         @click="postStart"
       >
         <span class="align-sub material-icons">ios_share</span>

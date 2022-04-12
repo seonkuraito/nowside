@@ -483,7 +483,7 @@ export default {
                 container: 'relative p-1 mx-auto w-full h-[140px] flex items-start justify-end box-border cursor-pointer border-2 border-C_gray-300 dark:border-C_gray-900 rounded bg-C_gray-100 dark:bg-[#333333] text-base leading-snug outline-none',
                 containerDisabled: 'cursor-not-allowed',
                 containerActive: 'border-2 ring-2 ring-C_green-500',
-                tag: 'flex items-center py-0.5 pl-2 mr-2 mb-2 text-C_blue-700 whitespace-nowrap bg-C_blue-200 rounded',
+                tag: 'flex items-center py-0.5 pl-2 mr-2 mb-2 text-C_blue-700 whitespace-nowrap bg-C_blue-200 rounded dark:opacity-30',
                 tagDisabled: 'pr-2 cursor-not-allowed',
                 tagsSearch: 'absolute inset-0 border-0 outline-none focus:ring-0 appearance-none p-0 text-base font-sans box-border w-full bg-C_gray-100 dark:bg-[#333333]',
               }"
@@ -503,14 +503,14 @@ export default {
       <!-- 按鈕 -->
       <section class="flex justify-center">
         <router-link
-          class="flex justify-center items-center py-2 mr-6 w-[196px] text-lg font-bold text-C_blue-700 bg-white hover:bg-C_gray-100 rounded border-2 border-C_blue-400 shadow-lg"
+          class="flex justify-center items-center py-2 mr-6 w-[196px] text-lg font-bold text-C_blue-700 bg-white hover:bg-C_gray-100 rounded border-2 border-C_blue-400 shadow-lg dark:opacity-30"
           to="/"
         >
           <span class="mr-1 material-icons">reply</span>
           取消
         </router-link>
         <router-link
-          class="flex justify-center items-center py-2 w-[196px] text-lg font-bold text-white bg-C_green-500 hover:bg-C_green-400 rounded shadow-lg"
+          class="flex justify-center items-center py-2 w-[196px] text-lg font-bold text-white bg-C_green-500 hover:bg-C_green-400 rounded shadow-lg dark:opacity-80"
           to="/project"
           @click="postProjectParams"
         >

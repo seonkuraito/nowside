@@ -269,14 +269,6 @@ export default {
           <li class="mb-4">
             <div class="flex justify-between w-full">
               <button
-                v-if="favoriteActive === false"
-                class="flex justify-center items-center py-2 px-6 text-md font-medium text-C_blue-400 bg-white hover:bg-C_gray-100 rounded border-2 border-C_gray-300" 
-                @click="addFavorite(detailParams.Id)"
-              >
-                <span class="mr-1 material-icons">favorite_border</span>
-                收藏
-              </button>
-              <button
                 v-if="favoriteActive === true"
                 class="flex justify-center items-center py-2 px-6 text-md font-medium text-C_blue-700 bg-white hover:bg-C_gray-100 rounded border-2 border-C_gray-300" 
                 @click="cancelFavorite(detailParams.Id)"
@@ -284,12 +276,37 @@ export default {
                 <span class="mr-1 material-icons">favorite</span>
                 收藏
               </button>
+              <button
+                v-if="favoriteActive === false"
+                class="flex justify-center items-center py-2 px-6 text-md font-medium text-C_blue-400 bg-white hover:bg-C_gray-100 rounded border-2 border-C_gray-300" 
+                @click="addFavorite(detailParams.Id)"
+              >
+                <span class="mr-1 material-icons">favorite_border</span>
+                收藏
+              </button>
               <router-link
+                v-if="organizerActive === true && detailParams.ProjectState === '媒合中'"
                 class="flex justify-center items-center py-2 px-6 text-md font-medium text-white bg-C_green-500 hover:bg-C_green-400 rounded"
                 :to="{ name: 'ProjectEdit', params: { projectId: detailParams.Id, }, }"
               >
-                <span class="mr-1 material-icons">north_east</span>
+                <span class="mr-1 text-xl material-icons">edit_note</span>
                 編輯
+              </router-link>
+              <router-link
+                v-if="organizerActive === true && detailParams.ProjectState === '進行中'"
+                class="flex justify-center items-center py-2 px-6 text-md font-medium text-white bg-C_green-500 hover:bg-C_green-400 rounded"
+                :to="{ name: 'CreateSuccess', params: { projectId: projectId, } }"
+              >
+                <span class="mr-1 text-xl material-icons">done</span>
+                完成
+              </router-link>
+              <router-link
+                v-if="organizerActive === false"
+                class="flex justify-center items-center py-2 px-6 text-md font-medium text-white bg-C_green-500 hover:bg-C_green-400 rounded"
+                :to="{ name: 'ProjectApply', params: { projectId: projectId, } }"
+              >
+                <span class="mr-1 text-xl material-icons">launch</span>
+                參與
               </router-link>
             </div>
           </li>
@@ -369,7 +386,7 @@ export default {
               <div
                 v-for="skill in detailParams.PartnerSkills"
                 :key="skill.Id"
-                class="inline-block mr-2 mb-4 bg-C_blue-200 rounded"
+                class="inline-block mr-2 mb-4 bg-C_blue-200 rounded dark:opacity-30"
               >
                 <p class="px-4">
                   {{ skill.skill }}
@@ -395,31 +412,17 @@ export default {
             <div class="flex">
               <!-- 複製連結 -->
               <button class="mr-6 nowside-button-blue-md">
+                <span class="mr-1 material-icons">content_copy</span>
                 複製連結
               </button>
               <!-- 審核組員 -->
               <router-link
-                v-if="organizerActive === true"
+                v-if="organizerActive === true && detailParams.ProjectState === '媒合中'"
                 class="mr-6 nowside-button-blue-md"
                 :to="{ name: 'ProjectMatch', params: { projectId: projectId, } }"
               >
+                <span class="mr-1 material-icons">person_add</span>
                 審核組員
-              </router-link>
-              <!-- 參與專案 -->
-              <router-link
-                v-if="organizerActive === false"
-                class="mr-6 nowside-button-blue-md"
-                :to="{ name: 'ProjectApply', params: { projectId: projectId, } }"
-              >
-                參與專案
-              </router-link>
-              <!-- 完成專案 -->
-              <router-link
-                v-if="organizerActive === true && detailParams.ProjectState === '進行中'"
-                class="mr-6 nowside-button-blue-md"
-                :to="{ name: 'CreateSuccess', params: { projectId: projectId, } }"
-              >
-                完成專案
               </router-link>
               <!-- 關閉專案 -->
               <button
@@ -427,6 +430,7 @@ export default {
                 class="mr-6 nowside-button-blue-md"
                 @click="postClose"
               >
+                <span class="mr-1 material-icons">disabled_visible</span>
                 關閉專案
               </button>
               <!-- 重啟專案 -->
@@ -435,22 +439,25 @@ export default {
                 class="mr-6 nowside-button-blue-md"
                 @click="postRestart"
               >
+                <span class="mr-1 material-icons">access_time</span>
                 重啟專案
               </button>
               <!-- 廢棄專案 -->
               <button
-                v-if="detailParams.ProjectState === '進行中'"
+                v-if="organizerActive === true && detailParams.ProjectState === '進行中'"
                 class="mr-6 nowside-button-blue-md"
                 @click="postGiveUp"
               >
+                <span class="mr-1 material-icons">remove_circle_outline</span>
                 廢棄專案
               </button>
               <!-- 刪除專案 -->
               <button
-                v-if="detailParams.ProjectState === '已廢棄'"
+                v-if="organizerActive === true && detailParams.ProjectState === '已廢棄'"
                 class="mr-6 nowside-button-blue-md"
                 @click="postDelete"
               >
+                <span class="mr-1 material-icons">delete</span>
                 刪除專案
               </button>
             </div>

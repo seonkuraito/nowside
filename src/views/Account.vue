@@ -357,7 +357,7 @@ export default {
               <div
                 v-for="skill in accountParams.Skills"
                 :key="skill.Id"
-                class="inline-block mr-2 mb-4 bg-C_blue-200 rounded"
+                class="inline-block mr-2 mb-4 bg-C_blue-200 rounded dark:opacity-30"
               >
                 <span class="px-4">{{ skill.skill }}</span>
               </div>
@@ -389,7 +389,7 @@ export default {
           class="flex justify-center items-center nowside-button-lightGreen-md"
           to="/accountedit"
         >
-          <span class="mr-1 material-icons">edit</span>
+          <span class="mr-1 text-xl material-icons">edit_note</span>
           編輯
         </router-link>
       </div>
