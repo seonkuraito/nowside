@@ -2,6 +2,7 @@
 import { S_login } from '@/http/api';
 import Header from '@/components/Header.vue';
 import Footer from '@/components/Footer.vue';
+// import button 
 
 export default {
   name: 'App',
@@ -33,10 +34,16 @@ export default {
       return style;
     },
   },
+  mounted() {},
   methods: {
     // 深夜模式 切換
     darkModeToggle() {
       this.isDark = !this.isDark;
+      this.$notify({
+        group: "foo",
+        title: "Success",
+        text: "登入成功，歡迎來到 Side Project Now。"
+      }, 7000)
     },
     // 發起專案 驗證
     createProjectToggle() {
@@ -77,12 +84,61 @@ export default {
         console.log(error);
       });
     },
+    // 註冊會員
+    toSignup() {
+        this.isDisplay = false;
+        this.$router.push({ path: '/signup' });
+    },
   },
 }
 </script>
 
 <template>
   <article :class="isDark ? 'dark' : ''">
+    <NotificationGroup group="foo">
+      <div
+        class="flex fixed top-16 right-6 z-50 justify-end items-start pointer-events-none"
+      >
+        <div class="w-full max-w-sm">
+          <Notification
+            v-slot="{ notifications }"
+            enter="transform ease-out duration-300 transition"
+            enter-from="translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-4"
+            enter-to="translate-y-0 opacity-100 sm:translate-x-0"
+            leave="transition ease-in duration-500"
+            leave-from="opacity-100"
+            leave-to="opacity-0"
+            move="transition duration-500"
+            move-delay="delay-300"
+          >
+            <div
+              v-for="notification in notifications"
+              :key="notification.id"
+              class="flex overflow-hidden mx-auto mt-4 w-full max-w-sm bg-white dark:bg-[#333333] rounded-lg shadow-md"
+            >
+              <div class="flex justify-center items-center w-12 bg-C_green-500">
+                <svg
+                  class="w-6 h-6 text-white fill-current"
+                  viewBox="0 0 40 40"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M20 3.33331C10.8 3.33331 3.33337 10.8 3.33337 20C3.33337 29.2 10.8 36.6666 20 36.6666C29.2 36.6666 36.6667 29.2 36.6667 20C36.6667 10.8 29.2 3.33331 20 3.33331ZM16.6667 28.3333L8.33337 20L10.6834 17.65L16.6667 23.6166L29.3167 10.9666L31.6667 13.3333L16.6667 28.3333Z"></path>
+                </svg>
+              </div>
+
+              <div class="py-4 px-5 -mx-3">
+                <div class="mx-3">
+                  <span class="text-lg font-semibold text-C_green-500">{{ notification.title }}</span>
+                  <p class=" text-gray-600 dark:text-C_blue-200">
+                    {{ notification.text }}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </Notification>
+        </div>
+      </div>
+    </NotificationGroup>
     <section
       class="w-full h-full"
       :style="backgroundImage"
@@ -172,12 +228,13 @@ export default {
                 >
                   登入
                 </button>
-                <router-link
+                <button
+                  type="button"
                   class="mb-12 nowside-button-lightBlue-lg"
-                  to="/signup"
+                  @click="toSignup"
                 >
                   立即註冊
-                </router-link>
+                </button>
                 <p class="flex justify-center text-xs text-C_blue-600">
                   沒有信箱？立即註冊
                 </p>

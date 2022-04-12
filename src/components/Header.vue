@@ -77,14 +77,11 @@ export default {
         </button>
       </li>
       <!-- 訊息 -->
-      <li>
-        <!-- <router-link to="/accountmessage">
-          <span class="text-2xl align-sub material-icons">notifications</span>
-        </router-link> -->
+      <!-- <li>
         <button to="/accountmessage">
           <span class="text-2xl align-sub material-icons">notifications</span>
         </button>
-      </li>
+      </li> -->
       <!-- 登入 -->
       <li>
         <button @click="loginModalToggle">

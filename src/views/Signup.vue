@@ -155,6 +155,7 @@ export default {
         console.log('message：', res.data.message);
         console.log('token：', res.data.token);
         localStorage.setItem('nowsideToken', res.data.token);
+        this.$router.push({ name: 'Account' });
       })
       .catch(error => {
         console.log(error);
@@ -494,13 +495,12 @@ export default {
           </div>
           <!-- 按鈕 -->
           <div>
-            <router-link
+            <button
               class="mb-12 nowside-button-darkBlue-lg"
-              to="/account"
               @click="postSignup"
             >
               完成
-            </router-link>
+            </button>
             <p class="flex justify-center text-xs text-C_blue-600 dark:text-C_blue-200">
               完成後，進一步填寫個人資料設定
             </p>

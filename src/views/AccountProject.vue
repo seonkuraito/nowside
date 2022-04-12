@@ -239,7 +239,7 @@ export default {
             </button>
           </li>
           <!-- 收藏的專案 -->
-          <li class="mb-6 hover:text-C_blue-400 dark:hover:text-C_blue-200">
+          <li class="hover:text-C_blue-400 dark:hover:text-C_blue-200">
             <button
               class="font-medium"
               @click="getSaveListParams"
@@ -248,14 +248,14 @@ export default {
             </button>
           </li>
           <!-- 通知 -->
-          <li class=" hover:text-C_blue-400 dark:hover:text-C_blue-200">
+          <!-- <li class=" hover:text-C_blue-400 dark:hover:text-C_blue-200">
             <router-link
               class="font-medium"
               to="/accountmessage"
             >
               通知
             </router-link>
-          </li>
+          </li> -->
         </ul>
       </section>
       <!-- 【右】專案列表 -->

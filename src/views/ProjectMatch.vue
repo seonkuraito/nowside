@@ -128,6 +128,7 @@ export default {
     postStart() {
       S_startProject(this.projectId).then(res =>{
         console.log('確認所有組員 開始專案', res.data.status);
+        this.$router.push({ name: 'ProjectView', params: { projectId: this.projectId, },});
       })
       .catch(error => {
         console.log(error);

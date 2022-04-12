@@ -185,13 +185,13 @@ export default {
 <template>
   <article class="pt-[60px] pb-[180px] w-full h-full">
     <!-- Banner -->
-    <section class="flex justify-center mb-28 bg-C_gray-100">
+    <!-- <section class="flex justify-center mb-28 bg-C_gray-100">
       <img
         class="object-cover w-screen h-[560px]"
         src="https://picsum.photos/1920/560?random=1"
         alt="banner"
       >
-    </section>
+    </section> -->
     <!-- 搜尋區塊 -->
     <section class="flex flex-col justify-center items-center py-12 mb-24 h-[232px] nowside-container-lg nowside-shadow">
       <div class="w-[1076px]">

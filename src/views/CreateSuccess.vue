@@ -299,6 +299,7 @@ export default {
                 @change="uploadBanner"
               >
               <input
+                v-model="successParams.ProjectBanner"
                 type="text"
                 class="w-full tracking-wide text-C_blue-600 dark:text-C_blue-200 bg-C_gray-100 dark:bg-[#333333] rounded border-2 border-C_gray-300 focus:border-C_green-500 dark:border-C_gray-900 focus:ring-2 focus:ring-C_green-500 form-input"
                 disabled
@@ -324,6 +325,7 @@ export default {
                 @change="uploadPhotos"
               >
               <input
+                v-model="successParams.ProjectPhotos"
                 type="text"
                 class="w-full tracking-wide text-C_blue-600 dark:text-C_blue-200 bg-C_gray-100 dark:bg-[#333333] rounded border-2 border-C_gray-300 focus:border-C_green-500 dark:border-C_gray-900 focus:ring-2 focus:ring-C_green-500 form-input"
                 disabled
@@ -506,7 +508,7 @@ export default {
           @click="postProjectParams"
         >
           <span class="mr-1 material-icons">ios_share</span>
-          發起專案
+          完成專案
         </router-link>
       </section>
     </div>

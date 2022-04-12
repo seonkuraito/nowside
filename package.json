@@ -5,6 +5,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview --port 5050",
+    "staging": "vite build --mode staging",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
   },
   "dependencies": {
@@ -12,6 +13,7 @@
     "animate.css": "^4.1.1",
     "axios": "^0.26.1",
     "moment": "^2.29.1",
+    "notiwind": "^1.2.5",
     "vue": "^3.2.31",
     "vue-router": "^4.0.12"
   },
