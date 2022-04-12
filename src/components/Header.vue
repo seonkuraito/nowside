@@ -13,6 +13,10 @@ export default {
       this.isDark = !this.isDark;
       this.$emit('dark-mode-emit');
     },
+    // 發起專案 驗證
+    createProjectToggle() {
+      this.$emit('create-projectT-toggle');
+    },
     // 登入視窗 顯示
     loginModalToggle() {
       this.$emit('login-modal-emit');
@@ -55,12 +59,12 @@ export default {
       </li>
       <!-- 發起專案 -->
       <li>
-        <router-link
+        <button
           class="font-medium active:text-C_green-500 border-b-4 border-C_blue-300/0 hover:border-C_green-300/100"
-          to="/create"
+          @click="createProjectToggle"
         >
           發起專案
-        </router-link>
+        </button>
       </li>
       <!-- 深夜模式 -->
       <li>

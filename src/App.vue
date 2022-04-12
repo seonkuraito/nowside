@@ -11,7 +11,7 @@ export default {
   data() {
     return {
       isDark: false,
-      isDisplay: true,
+      isDisplay: false,
       loginParams: {
         Account: '',
         Password: '',
@@ -38,18 +38,31 @@ export default {
     darkModeToggle() {
       this.isDark = !this.isDark;
     },
-    // 登入視窗 顯示
-    loginModalToggle() {
+    // 發起專案 驗證
+    createProjectToggle() {
+      this.isDisplay = true;
       const token = localStorage.getItem('nowsideToken');
       if (token) {
+        this.isDisplay = false;
+        this.$router.push({ path: '/create' });
+      } else {
+        this.isDisplay = true;
+      }
+    },
+    // 登入視窗 顯示
+    loginModalToggle() {
+      this.isDisplay = true;
+      const token = localStorage.getItem('nowsideToken');
+      if (token) {
+        this.isDisplay = false;
         this.$router.push({ path: '/account' });
       } else {
-        this.isDisplay = !this.isDisplay;
+        this.isDisplay = true;
       }
     },
     // 登入視窗 關閉
     closeLoginModal() {
-      this.isDisplay = !this.isDisplay;
+      this.isDisplay = false;
     },
     // 登入會員
     postLogin() {
@@ -58,6 +71,7 @@ export default {
         console.log('message：', res.data.message);
         console.log('token：', res.data.token);
         localStorage.setItem('nowsideToken', res.data.token);
+        this.isDisplay = false;
         this.$router.push({ path: '/account' });
       })
       .catch(error => {
@@ -175,6 +189,7 @@ export default {
       <Header
         @dark-mode-emit="darkModeToggle"
         @login-modal-emit="loginModalToggle"
+        @create-projectT-toggle="createProjectToggle"
       ></Header>
       <router-view></router-view>
       <Footer></Footer>

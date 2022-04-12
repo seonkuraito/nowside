@@ -1,8 +1,8 @@
 <script>
 import { S_uploadProfile, S_signup, S_login, } from '@/http/api';
-import default06 from '../assets/default-06.png';
-import default07 from '../assets/default-07.png';
-import default08 from '../assets/default-08.png';
+import default01 from '../assets/default-01.png';
+import default02 from '../assets/default-02.png';
+import default03 from '../assets/default-03.png';
 
 export default {
   name: 'Signup',
@@ -18,19 +18,19 @@ export default {
       isDark: false,
       defaultPicture: [
         {
-          Id: 6,
-          Title: 'default-06.png',
-          Content: default06,
+          Id: 1,
+          Title: 'default-01.png',
+          Content: default01,
         },
         {
-          Id: 7,
-          Title: 'default-07.png',
-          Content: default07,
+          Id: 2,
+          Title: 'default-02.png',
+          Content: default02,
         },
         {
-          Id: 8,
-          Title: 'default-08.png',
-          Content: default08,
+          Id: 3,
+          Title: 'default-03.png',
+          Content: default03,
         },
       ],
       contactTime: [

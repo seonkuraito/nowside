@@ -255,7 +255,7 @@ export default {
             <p class="inline-block mb-4 text-lg font-medium text-C_blue-700 dark:text-C_blue-400">
               專案內容
             </p><br>
-            <p class="dark:text-C_blue-200">
+            <p class="dark:text-C_blue-200 whitespace-pre-wrap">
               {{ detailParams.ProjectContext }}
             </p>
           </li>
@@ -264,7 +264,7 @@ export default {
             <p class="inline-block mb-4 text-lg font-medium text-C_blue-700 dark:text-C_blue-400">
               夥伴條件
             </p><br>
-            <p class="dark:text-C_blue-200">
+            <p class="dark:text-C_blue-200 whitespace-pre-wrap">
               {{ detailParams.PartnerCondition }}
             </p>
           </li>

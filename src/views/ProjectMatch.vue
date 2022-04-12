@@ -160,7 +160,7 @@ export default {
               狀態
             </th>
             <th class="py-4 font-medium">
-              日期
+              申請日期
             </th>
             <th class="py-4 font-medium">
               申請者
@@ -180,10 +180,12 @@ export default {
         >
           <tr class="text-center">
             <!-- 狀態 -->
-            <td class="py-6">
-              <span>{{ list.ApplicantState }}</span>
+            <td
+              class="py-6"
+            >
+              <span :class="{ 'text-orange-500': list.ApplicantState === '審核中', 'text-C_green-500': list.ApplicantState === '已通過', 'text-C_red': list.ApplicantState === '未通過', }">{{ list.ApplicantState }}</span>
             </td>
-            <!-- 日期 -->
+            <!-- 申請日期 -->
             <td class="py-6">
               <span>{{ timeFormat(list.InitDate) }}</span>
             </td>
