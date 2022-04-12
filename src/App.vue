@@ -72,7 +72,6 @@ export default {
         console.log('token：', res.data.token);
         localStorage.setItem('nowsideToken', res.data.token);
         this.isDisplay = false;
-        this.$router.push({ path: '/account' });
       })
       .catch(error => {
         console.log(error);
@@ -137,6 +136,7 @@ export default {
                       name="password"     
                       class="peer nowside-peerInput"
                       placeholder="密碼"
+                      @keydown.enter="postLogin"
                     >
                     <label
                       for="password"

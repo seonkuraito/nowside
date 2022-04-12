@@ -93,7 +93,7 @@ export default {
       <div class="flex justify-center w-full">
         <router-link
           class="flex justify-center items-center nowside-button-white-md"
-          to="/account"
+          :to="{ name: 'ProjectView', params: { projectId: projectId, }, }"
         >
           取消
         </router-link>

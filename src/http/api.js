@@ -45,8 +45,12 @@ export const S_getApplicant = (params) => axiosInstance.get(`/GetApplicant?id=${
 export const S_getApplicantInfo = (id, memberId) => axiosInstance.get(`/GetApplicantInfo?memberId=${memberId}&projectId=${id}`); // 取得申請人資料
 export const S_passApplicant = (id, memberId) => axiosInstance.post(`/PassApplicant?memberId=${memberId}&projectId=${id}`); // 通過申請人
 export const S_rejectApplicant = (id, memberId) => axiosInstance.post(`/RejectApplicant?memberId=${memberId}&projectId=${id}`); // 不通過申請人
-export const S_startProject = (params) => axiosInstance.post(`/StartProject?Id=${params}`); // 確認所有組員 開始專案
+export const S_startProject = (id) => axiosInstance.post(`/StartProject?projectId=${id}`); // 確認所有組員 開始專案
 export const S_attendProject = (params, data) => axiosInstance.post(`/AttendProject?Id=${params}`, data); // 參與專案
+export const S_giveUpProject = (id) => axiosInstance.post(`/GiveUpProject?projectId=${id}`); // 廢棄專案
+export const S_deleteProject = (id) => axiosInstance.post(`/DeleteProject?projectId=${id}`); // 刪除專案
+export const S_closeProject = (id) => axiosInstance.post(`/CloseProject?projectId=${id}`); // 關閉專案
+export const S_restartProject = (id) => axiosInstance.post(`/RestartProject?projectId=${id}`); // 重啟專案
 
 // SuccessProject
 export const S_getSuccessProject = (params) => axiosInstance.get('/GetSuccessProject',params); // 取得已完成專案列表

@@ -108,6 +108,7 @@ export default {
     postPass(projectId, memberId) {
       S_passApplicant(projectId, memberId).then(res =>{
         console.log('通過申請人', res.data.status);
+        this.getListParams();
       })
       .catch(error => {
         console.log(error);
@@ -117,14 +118,15 @@ export default {
     postReject(projectId, memberId) {
       S_rejectApplicant(projectId, memberId).then(res =>{
         console.log('不通過申請人', res.data.status);
+        this.getListParams();
       })
       .catch(error => {
         console.log(error);
       });
     },
     // 確認所有組員 開始專案
-    postStart(projectId, memberId) {
-      S_startProject(projectId, memberId).then(res =>{
+    postStart() {
+      S_startProject(this.projectId).then(res =>{
         console.log('確認所有組員 開始專案', res.data.status);
       })
       .catch(error => {
@@ -544,11 +546,17 @@ export default {
     </section>
     <!-- 按鈕 -->
     <section class="flex justify-center">
-      <button class="py-2 mr-6 w-[196px] text-lg font-bold text-C_blue-700 bg-white hover:bg-C_gray-100 rounded border-2 border-C_blue-400 shadow-lg">
+      <router-link
+        class="flex justify-center items-center py-2 mr-6 w-[196px] text-lg font-bold text-C_blue-700 bg-white hover:bg-C_gray-100 rounded border-2 border-C_blue-400 shadow-lg"
+        :to="{ name: 'ProjectView', params: { projectId: projectId, }, }"
+      >
         <span class="align-sub material-icons">reply</span>
         回上一步
-      </button>
-      <button class="py-2 w-[196px] text-lg font-bold text-white bg-C_green-500 hover:bg-C_green-400 rounded shadow-lg">
+      </router-link>
+      <button
+        class="flex justify-center items-center py-2 w-[196px] text-lg font-bold text-white bg-C_green-500 hover:bg-C_green-400 rounded shadow-lg"
+        @click="postStart"
+      >
         <span class="align-sub material-icons">ios_share</span>
         確認媒合
       </button>

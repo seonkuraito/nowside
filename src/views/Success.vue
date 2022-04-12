@@ -196,7 +196,7 @@ export default {
     <section class="flex flex-col justify-center items-center py-12 mb-24 h-[232px] nowside-container-lg nowside-shadow">
       <div class="w-[1076px]">
         <!-- 搜尋 input -->
-        <label class="block relative mb-10">
+        <label class="block relative">
           <span class="flex absolute inset-y-0 left-0 items-center pl-2">
             <span
               class="ml-12 text-3xl text-C_green-500 material-icons"
@@ -210,8 +210,7 @@ export default {
           >
         </label>
         <!-- 搜尋條件 select -->
-        <form>
-          <!-- 專案類別 -->
+        <!-- <form>
           <select
             id="skillsData"
             class="nowside-searchSelect"
@@ -231,7 +230,6 @@ export default {
               {{ type.ProjectType }}
             </option>
           </select>
-          <!-- 媒合期限 -->
           <select
             id=""
             class="nowside-searchSelect"
@@ -244,7 +242,6 @@ export default {
               媒合期限
             </option>
           </select>
-          <!-- 團隊人數 -->
           <select
             id=""
             class="nowside-searchSelect"
@@ -257,7 +254,6 @@ export default {
               團隊人數
             </option>
           </select>
-          <!-- 使用技術 -->
           <select
             id="classData"
             class="nowside-searchSelect"
@@ -277,7 +273,7 @@ export default {
               {{ skill.skill }}
             </option>
           </select>
-        </form>
+        </form> -->
       </div>
     </section>
     <!-- 列表區塊 -->

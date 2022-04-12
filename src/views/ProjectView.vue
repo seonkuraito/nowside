@@ -2,6 +2,10 @@
 import {
   S_checkUser,
   S_getProjectDetail,
+  S_giveUpProject,
+  S_deleteProject,
+  S_closeProject,
+  S_restartProject,
   S_getProjectMessage,
   S_sendProjectMessage,
   S_presentFavoriteProject,
@@ -113,6 +117,46 @@ export default {
         console.log(error);
       });
     },
+    // 廢棄專案
+    postGiveUp() {
+      S_giveUpProject(this.projectId).then(res =>{
+        console.log('廢棄專案', res.data);
+        this.getDetailParams();
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    },
+    // 刪除專案
+    postDelete() {
+      S_deleteProject(this.projectId).then(res =>{
+        console.log('刪除專案', res.data);
+        this.getDetailParams();
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    },
+    // 關閉專案
+    postClose() {
+      S_closeProject(this.projectId).then(res =>{
+        console.log('關閉專案', res.data);
+        this.getDetailParams();
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    },
+    // 重啟專案
+    postRestart() {
+      S_restartProject(this.projectId).then(res =>{
+        console.log('重啟專案', res.data);
+        this.getDetailParams();
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    },
     // 送出專案留言
     postMessageParams() {
       S_sendProjectMessage(this.projectId, this.messageTitle, this.messageContent).then(res =>{
@@ -216,7 +260,10 @@ export default {
               </p>
             </div>
             <div class="flex items-center">
-              <span class="mr-1 text-xl text-orange-500 material-icons">adjust</span>
+              <span
+                class="mr-1 text-xl material-icons"
+                :class="{ 'text-orange-500': detailParams.ProjectState === '媒合中', 'text-C_green-500': detailParams.ProjectState === '進行中', 'text-C_gray-900': detailParams.ProjectState === '已關閉' }"
+              >adjust</span>
               <p class="font-medium text-C_blue-700 dark:text-C_blue-200">
                 {{ detailParams.ProjectState }}
               </p>
@@ -294,11 +341,12 @@ export default {
               {{ timeFormat(detailParams.GroupDeadline) }}
             </p>
           </li>
-          <!-- 分享 -->
+          <!-- 功能 -->
           <li class="flex items-center mb-10">
             <p class="inline-block mr-8 mb-4 text-lg font-medium text-C_blue-700 dark:text-C_blue-400">
               功能
             </p>
+            <!-- 按鈕 -->
             <div class="flex">
               <!-- 複製連結 -->
               <button class="mr-6 nowside-button-blue-md">
@@ -306,6 +354,7 @@ export default {
               </button>
               <!-- 審核組員 -->
               <router-link
+                v-if="organizerActive === true"
                 class="mr-6 nowside-button-blue-md"
                 :to="{ name: 'ProjectMatch', params: { projectId: projectId, } }"
               >
@@ -313,6 +362,7 @@ export default {
               </router-link>
               <!-- 參與專案 -->
               <router-link
+                v-if="organizerActive === false"
                 class="mr-6 nowside-button-blue-md"
                 :to="{ name: 'ProjectApply', params: { projectId: projectId, } }"
               >
@@ -320,11 +370,44 @@ export default {
               </router-link>
               <!-- 完成專案 -->
               <router-link
+                v-if="organizerActive === true && detailParams.ProjectState === '進行中'"
                 class="mr-6 nowside-button-blue-md"
                 :to="{ name: 'CreateSuccess', params: { projectId: projectId, } }"
               >
                 完成專案
               </router-link>
+              <!-- 關閉專案 -->
+              <button
+                v-if="organizerActive === true && detailParams.ProjectState === '媒合中'"
+                class="mr-6 nowside-button-blue-md"
+                @click="postClose"
+              >
+                關閉專案
+              </button>
+              <!-- 重啟專案 -->
+              <button
+                v-if="organizerActive === true && detailParams.ProjectState === '已關閉'"
+                class="mr-6 nowside-button-blue-md"
+                @click="postRestart"
+              >
+                重啟專案
+              </button>
+              <!-- 廢棄專案 -->
+              <button
+                v-if="detailParams.ProjectState === '進行中'"
+                class="mr-6 nowside-button-blue-md"
+                @click="postGiveUp"
+              >
+                廢棄專案
+              </button>
+              <!-- 刪除專案 -->
+              <button
+                v-if="detailParams.ProjectState === '已廢棄'"
+                class="mr-6 nowside-button-blue-md"
+                @click="postDelete"
+              >
+                刪除專案
+              </button>
             </div>
           </li>
           <!-- 參加人員 -->
