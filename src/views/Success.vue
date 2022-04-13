@@ -233,13 +233,13 @@ export default {
             >
               專案類別
             </option>
-            <option
+            <!-- <option
               v-for="type in classData"
               :key="type.Id"
               :value="type.Id"
             >
               {{ type.ProjectType }}
-            </option>
+            </option> -->
           </select>
           <select
             id=""

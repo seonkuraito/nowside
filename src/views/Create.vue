@@ -213,7 +213,6 @@ export default {
             type="text"
             class="w-full text-3xl font-medium text-center text-C_blue-400 dark:bg-C_black focus:outline-none focus:ring-0"
           >
-          <span class="inline-block absolute right-4 bottom-2 text-3xl text-C_green-500 rounded material-icons">edit</span>
         </form>
       </section>
       <!-- 專案詳細 -->

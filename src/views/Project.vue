@@ -216,7 +216,7 @@ export default {
         <form>
           <select
             id="skillsData"
-            class="py-2 pr-6 pl-2 mr-8 w-40 text-lg font-medium text-center text-white bg-C_blue-700 hover:bg-C_blue-600 rounded border-0 focus:ring-0 form-select"
+            class="nowside-searchSelect"
             name="skillsData"
           >
             <option
@@ -225,13 +225,13 @@ export default {
             >
               專案類別
             </option>
-            <option
+            <!-- <option
               v-for="type in classData"
               :key="type.Id"
               :value="type.Id"
             >
               {{ type.ProjectType }}
-            </option>
+            </option> -->
           </select>
           <select
             id=""
