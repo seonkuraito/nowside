@@ -1,59 +1,61 @@
 <script>
-import { S_updateProjectState } from '@/http/api';
+  import { S_updateProjectState } from '@/http/api';
 
-export default {
-  name: 'Home',
-  components: {},
-  data() {
-    return {
-      NickName: '',
-    };
-  },
-  computed: {},
-  mounted() {
-    this.updateProjectState();
-  },
-  methods: {
-    // 更新專案狀態
-    updateProjectState() {
-      S_updateProjectState().then(res =>{
-        console.log(`更新專案狀態：${res.data.status}`);
-      })
-      .catch(error => {
-        console.log(error);
-      });
+  export default {
+    name: 'Home',
+    components: {},
+    data() {
+      return {
+        NickName: '',
+      };
     },
-  },
-}
+    computed: {},
+    mounted() {
+      this.updateProjectState();
+    },
+    methods: {
+      // 更新專案狀態
+      updateProjectState() {
+        S_updateProjectState().then(res =>{
+          console.log(`更新專案狀態：${res.data.status}`);
+        })
+        .catch(error => {
+          console.log(error);
+        });
+      },
+    },
+  }
 </script>
 
 <template>
   <main class="pt-[60px] w-full h-full">
     <!-- banner -->
-    <article class="flex relative justify-center bg-white dark:bg-C_black limit:w-full mobile:flex-col mobile:items-center mobile:w-full mobile:h-fit mobile:min-h-fit desktop:w-full desktop:min-h-[732px]">
+    <article class="flex relative justify-center bg-white dark:bg-C_black limit:w-full mobile:flex-col mobile:items-center mobile:pb-32 mobile:w-full mobile:h-fit mobile:min-h-fit desktop:w-full desktop:min-h-[732px]">
       <!-- 藍色波浪 -->
       <img
-        class="absolute bottom-0 left-0"
+        class="absolute bottom-0 left-0 mobile:w-9/10"
         src="../assets/banner-01.svg"
         alt="banner-01"
       >
       <!-- 左半區塊 -->
-      <div class="z-10 w-1/2 mobile:w-full">
+      <div class="z-10 w-1/2 mobile:mb-32 mobile:w-full">
         <!-- slogon + 球 -->
-        <section class="flex right-0 flex-col items-end">
+        <section class="flex right-0 flex-col items-end mobile:items-center">
           <h1 class="mt-40 mb-9 w-[646px] font-chillax text-[40px] font-medium text-C_blue-700 dark:text-C_blue-400">
             Who we are?
           </h1>
           <h1 class="w-[646px] font-chillax text-[60px] font-medium text-C_blue-700 dark:text-C_blue-400">
             We are<br><span class="text-C_green-500">Side Project Now.</span>
           </h1>
-          <img
-            class="mr-8 w-[612px]"
-            src="../assets/banner-02.svg"
-            alt="banner-02"
-          >
-          <div class="-mt-12 animate-bounce">
-            <div class="mr-8 w-[48px] h-[48px] bg-C_green-700 rounded-full shadow-2xl"></div>
+          <div class="relative">
+            <img
+              class="mr-8 w-[612px]"
+              src="../assets/banner-02.svg"
+              alt="banner-02"
+            >
+            <div class="absolute right-0 bottom-0 animate-bounce">
+              <div class="mr-8 w-[48px] h-[48px] bg-C_green-700 rounded-full shadow-2xl mobile:mr-0"></div>
+            </div>
           </div>
         </section>
       </div>
@@ -66,7 +68,7 @@ export default {
             src="../assets/banner-03.svg"
             alt="banner-03"
           >
-          <form class=" relative ml-8 w-[636px] h-[62px] rounded-lg shadow-xl dark:shadow-none">
+          <form class="relative ml-8 w-[636px] h-[62px] rounded-lg shadow-xl dark:shadow-none mobile:mt-20">
             <input
               id="signup"
               v-model="NickName"
@@ -85,7 +87,7 @@ export default {
           </form>
         </section>
         <!-- 裝飾元素 -->
-        <section class="absolute top-0 left-[660px] mobile:top-[-112px]">
+        <section class="absolute top-0 left-[660px] mobile:top-[-144px] mobile:right-0 mobile:left-[510px]">
           <div class="flex relative flex-col w-[210px] h-fit">
             <img
               class="absolute top-[182px] animate__animated animate__infinite bounce__custom-P"
@@ -113,7 +115,7 @@ export default {
         STEP <span class="font-sans text-xl font-medium text-C_blue-600 dark:text-C_blue-400">使用步驟</span>
       </h2>
       <!-- 步驟卡片 -->
-      <ul class="flex justify-between p-8 w-[1296px] rounded-[48px] border-[3px] border-C_green-500">
+      <ul class="flex justify-center py-16 px-24 rounded-[48px] border-[3px] border-C_green-500 mobile:flex-col mobile:items-center desktop:w-fit">
         <!-- STEP1 -->
         <li class="flex flex-col items-center w-[416px] h-[524px]">
           <img
@@ -121,26 +123,26 @@ export default {
             src="../assets/card-01.svg"
             alt="step1"
           >
-          <h3 class="mb-4 font-chillax text-xl font-medium text-C_blue-400">
-            STEP1 <span class="font-sans text-xl font-medium text-C_green-500">瀏覽專案</span>
+          <h3 class="mb-4 font-chillax text-3xl font-medium text-C_blue-400">
+            STEP1 <span class="font-sans text-C_green-500">瀏覽專案</span>
           </h3>
-          <p class="text-center text-C_blue-700 dark:text-C_blue-200">
+          <p class="text-lg text-center text-C_blue-700 dark:text-C_blue-200">
             登入會員後，點擊<span class="text-C_blue-400">瀏覽專案</span>尋找有興趣的<br>
             專案項目，將有興趣的專案項目點擊收藏<br>
             或直接點擊<span class="text-C_blue-400">參與專案</span>。
           </p>
         </li>
         <!-- STEP2 -->
-        <li class="flex flex-col items-center w-[416px] h-[524px]">
+        <li class="flex flex-col items-center mx-10 w-[416px] h-[524px] mobile:mx-0">
           <img
             class="mt-16 mb-6 w-[248px] h-[254px]"
             src="../assets/card-02.svg"
             alt="step2"
           >
-          <h3 class="mb-4 font-chillax text-xl font-medium text-C_blue-400">
-            STEP2 <span class="font-sans text-xl font-medium text-C_green-500">等待媒合</span>
+          <h3 class="mb-4 font-chillax text-3xl font-medium text-C_blue-400">
+            STEP2 <span class="font-sans text-C_green-500">等待媒合</span>
           </h3>
-          <p class="text-center text-C_blue-700 dark:text-C_blue-200">
+          <p class="text-lg text-center text-C_blue-700 dark:text-C_blue-200">
             點擊參與專案後請靜待媒合結果，<br>
             點擊<span class="text-C_blue-400">會員中心的通知列表</span>可以查看專案進度。
           </p>
@@ -152,10 +154,10 @@ export default {
             src="../assets/card-03.svg"
             alt="step3"
           >
-          <h3 class="mb-4 font-chillax text-xl font-medium text-C_blue-400">
-            STEP3 <span class="font-sans text-xl font-medium text-C_green-500">進行專案</span>
+          <h3 class="mb-4 font-chillax text-3xl font-medium text-C_blue-400">
+            STEP3 <span class="font-sans text-C_green-500">進行專案</span>
           </h3>
-          <p class="text-center text-C_blue-700 dark:text-C_blue-200">
+          <p class="text-lg text-center text-C_blue-700 dark:text-C_blue-200">
             恭喜你！媒合成功後可以<span class="text-C_blue-400">成功進行專案</span>，<br>
             和你的組員一起練功完成目標。
           </p>
@@ -169,12 +171,12 @@ export default {
         <h2 class="pb-1 mb-14 w-fit text-[40px] font-bold text-center text-C_blue-600 dark:text-C_blue-200 border-4 border-x-transparent border-t-transparent border-b-C_green-500">
           我們的團隊
         </h2>
-        <p class="text-xl font-medium text-C_blue-700 dark:text-C_blue-400">
+        <p class="text-xl font-medium text-C_blue-700 dark:text-C_blue-400 mobile:px-16 mobile:text-center">
           我們是一群力求新機會在火箭隊培訓的人員，由一位設計、前端、後端共同協作發想完成
         </p>
       </div>
       <!-- 組員圖片 -->
-      <ul class="flex justify-between w-[1296px]">
+      <ul class="flex justify-center mobile:flex-col mobile:items-center mobile:w-full desktop:w-full">
         <!-- Sharon -->
         <li class="flex relative flex-col justify-between items-center w-[364px] h-[515px]">
           <h3 class="flex justify-center items-center py-1 px-3 font-chillax text-lg font-medium text-C_blue-500 dark:text-C_blue-200 rounded-full border-[3px] border-[#FFF495]">
@@ -207,7 +209,7 @@ export default {
           </section>
         </li>
         <!-- Dennis -->
-        <li class="flex relative flex-col justify-between items-center w-[364px] h-[515px]">
+        <li class="flex relative flex-col justify-between items-center mx-32 w-[364px] h-[515px] mobile:my-40 mobile:mx-0">
           <h3 class="flex justify-center items-center py-1 px-3 w-full font-chillax text-lg font-medium text-C_blue-500 dark:text-C_blue-200 rounded-full border-[3px] border-[#FFBA7B]">
             <span class="mr-2 text-lg material-icons">mail_outline</span>
             <span class="select-all">seon.kuraito@gmail.com</span>
@@ -277,56 +279,56 @@ export default {
         <h2 class="pb-1 mb-14 w-fit text-[40px] font-bold text-center text-C_blue-600 dark:text-C_blue-200 border-4 border-x-transparent border-t-transparent border-b-C_green-500">
           為什麼選擇我們
         </h2>
-        <p class="text-xl font-medium text-C_blue-700 dark:text-C_blue-400">
+        <p class="text-xl font-medium text-C_blue-700 dark:text-C_blue-400 mobile:px-16 mobile:text-center">
           我們是一群力求新機會在火箭隊培訓的人員，由一位設計、前端、後端共同協作發想完成
         </p>
       </div>
       <!-- 特色 -->
-      <ul class="mb-40">
+      <ul class="mb-40 ">
         <!-- 具私密性 -->
-        <li class="flex justify-center mb-6">
+        <li class="flex justify-center mb-6 mobile:flex-col">
           <img
             class="w-[636px] h-[470px]"
             src="../assets/feature-01.svg"
             alt="feature-01"
           >
-          <div class="flex flex-col justify-center items-center w-[636px] h-[470px]">
+          <div class="flex flex-col justify-center items-center w-[636px] h-[470px] mobile:mt-[-144px]">
             <p class="mb-4 text-3xl font-medium text-C_blue-600 dark:text-C_blue-400">
               具私密性
             </p>
-            <p class="font-medium text-center text-C_blue-700 dark:text-C_blue-200">
+            <p class="text-lg font-medium text-center text-C_blue-700 dark:text-C_blue-200">
               除了發起者外一般人無法看到您的相關個人資料
             </p>
           </div>
         </li>
         <!-- 尋找適合您的專案 -->
-        <li class="flex flex-row-reverse justify-center mb-6">
+        <li class="flex flex-row-reverse justify-center mb-6 mobile:flex-col">
           <img
             class="w-[636px] h-[470px]"
             src="../assets/feature-02.svg"
             alt="feature-02"
           >
-          <div class="flex flex-col justify-center items-center w-[636px] h-[470px]">
+          <div class="flex flex-col justify-center items-center w-[636px] h-[470px] mobile:mt-[-144px]">
             <p class="mb-4 text-3xl font-medium text-C_blue-600 dark:text-C_blue-400">
               尋找適合您的專案
             </p>
-            <p class="font-medium text-center text-C_blue-700 dark:text-C_blue-200">
+            <p class="text-lg font-medium text-center text-C_blue-700 dark:text-C_blue-200">
               主要會根據您的技能等推送適合您的專案項目
             </p>
           </div>
         </li>
         <!-- 找不到適合的專案 -->
-        <li class="flex justify-center">
+        <li class="flex justify-center mobile:flex-col">
           <img
             class="w-[636px] h-[470px]"
             src="../assets/feature-03.svg"
             alt="feature-03"
           >
-          <div class="flex flex-col justify-center items-center w-[636px] h-[470px]">
+          <div class="flex flex-col justify-center items-center w-[636px] h-[470px] mobile:mt-[-144px]">
             <p class="mb-4 text-3xl font-medium text-C_blue-600 dark:text-C_blue-400">
               找不到喜歡的專案
             </p>
-            <p class="font-medium text-center text-C_blue-700 dark:text-C_blue-200">
+            <p class="text-lg font-medium text-center text-C_blue-700 dark:text-C_blue-200">
               倘若找不到喜歡的專案嗎？<br>
               你有酷點子嗎？<br>
               那就自己發起專案尋找適合您的夥伴
@@ -339,109 +341,109 @@ export default {
 </template>
 
 <style>
-.bounce__custom-P {
-  animation: bounce;
-  --animate-duration: 24s;
-}
+  .bounce__custom-P {
+    animation: bounce;
+    --animate-duration: 24s;
+  }
 
-.bounce__custom-Y {
-  animation: bounce;
-  --animate-duration: 12s;
-}
+  .bounce__custom-Y {
+    animation: bounce;
+    --animate-duration: 12s;
+  }
 
-.bounce__custom-O {
-  animation: bounce;
-  --animate-duration: 28s;
-}
+  .bounce__custom-O {
+    animation: bounce;
+    --animate-duration: 28s;
+  }
 
-.hovereffect {
-  width: 100%;
-  height: 100%;
-  float: left;
-  overflow: hidden;
-  position: relative;
-  text-align: center;
-  cursor: default;
-}
+  .hovereffect {
+    width: 100%;
+    height: 100%;
+    float: left;
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+    cursor: default;
+  }
 
-.hovereffect .overlay {
-  position: absolute;
-  overflow: hidden;
-  width: 80%;
-  height: 40%;
-  left: 10%;
-  top: 30%;
-  border-bottom: 1px solid #FFF;
-  border-top: 1px solid #FFF;
-  -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
-  transition: opacity 0.35s, transform 0.35s;
-  -webkit-transform: scale(0,1);
-  -ms-transform: scale(0,1);
-  transform: scale(0,1);
-}
+  .hovereffect .overlay {
+    position: absolute;
+    overflow: hidden;
+    width: 80%;
+    height: 40%;
+    left: 10%;
+    top: 30%;
+    border-bottom: 1px solid #FFF;
+    border-top: 1px solid #FFF;
+    -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
+    transition: opacity 0.35s, transform 0.35s;
+    -webkit-transform: scale(0,1);
+    -ms-transform: scale(0,1);
+    transform: scale(0,1);
+  }
 
-.hovereffect:hover .overlay {
-  opacity: 1;
-  filter: alpha(opacity=100);
-  -webkit-transform: scale(1);
-  -ms-transform: scale(1);
-  transform: scale(1);
-}
+  .hovereffect:hover .overlay {
+    opacity: 1;
+    filter: alpha(opacity=100);
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+  }
 
-.hovereffect img {
-  display: block;
-  position: relative;
-  -webkit-transition: all 0.35s;
-  transition: all 0.35s;
-}
+  .hovereffect img {
+    display: block;
+    position: relative;
+    -webkit-transition: all 0.35s;
+    transition: all 0.35s;
+  }
 
-.hovereffect:hover img {
-  filter: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feComponentTransfer color-interpolation-filters="sRGB"><feFuncR type="linear" slope="0.6" /><feFuncG type="linear" slope="0.6" /><feFuncB type="linear" slope="0.6" /></feComponentTransfer></filter></svg>#filter');
-  filter: brightness(0.6);
-  -webkit-filter: brightness(0.6);
-}
+  .hovereffect:hover img {
+    filter: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feComponentTransfer color-interpolation-filters="sRGB"><feFuncR type="linear" slope="0.6" /><feFuncG type="linear" slope="0.6" /><feFuncB type="linear" slope="0.6" /></feComponentTransfer></filter></svg>#filter');
+    filter: brightness(0.6);
+    -webkit-filter: brightness(0.6);
+  }
 
-.hovereffect h6 {
-  text-transform: uppercase;
-  text-align: center;
-  position: relative;
-  background-color: transparent;
-  color: #FFF;
-  padding: 1em 0;
-  opacity: 0;
-  filter: alpha(opacity=0);
-  -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
-  transition: opacity 0.35s, transform 0.35s;
-  -webkit-transform: translate3d(0,-100%,0);
-  transform: translate3d(0,-100%,0);
-}
+  .hovereffect h6 {
+    text-transform: uppercase;
+    text-align: center;
+    position: relative;
+    background-color: transparent;
+    color: #FFF;
+    padding: 1em 0;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
+    transition: opacity 0.35s, transform 0.35s;
+    -webkit-transform: translate3d(0,-100%,0);
+    transform: translate3d(0,-100%,0);
+  }
 
-.hovereffect button {
-  color: #FFF;
-  padding: 0;
-  opacity: 0;
-  filter: alpha(opacity=0);
-  -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
-  transition: opacity 0.35s, transform 0.35s;
-  -webkit-transform: translate3d(0,100%,0);
-  transform: translate3d(0,100%,0);
-}
+  .hovereffect button {
+    color: #FFF;
+    padding: 0;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
+    transition: opacity 0.35s, transform 0.35s;
+    -webkit-transform: translate3d(0,100%,0);
+    transform: translate3d(0,100%,0);
+  }
 
-.hovereffect p {
-  color: #FFF;
-  padding: 1em 0;
-  opacity: 0;
-  filter: alpha(opacity=0);
-  -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
-  transition: opacity 0.35s, transform 0.35s;
-  -webkit-transform: translate3d(0,100%,0);
-  transform: translate3d(0,100%,0);
-}
+  .hovereffect p {
+    color: #FFF;
+    padding: 1em 0;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
+    transition: opacity 0.35s, transform 0.35s;
+    -webkit-transform: translate3d(0,100%,0);
+    transform: translate3d(0,100%,0);
+  }
 
-.hovereffect:hover h6, .hovereffect:hover button, .hovereffect:hover p {
-  opacity: 1;
-  filter: alpha(opacity=100);
-  -webkit-transform: translate3d(0,0,0);
-  transform: translate3d(0,0,0);
-}
+  .hovereffect:hover h6, .hovereffect:hover button, .hovereffect:hover p {
+    opacity: 1;
+    filter: alpha(opacity=100);
+    -webkit-transform: translate3d(0,0,0);
+    transform: translate3d(0,0,0);
+  }
 </style>

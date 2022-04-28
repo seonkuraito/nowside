@@ -27,7 +27,7 @@ export default {
 
 <template>
   <article
-    class="flex fixed top-0 z-40 justify-center items-center w-screen h-[60px] text-lg text-C_blue-700 dark:text-white bg-white dark:bg-black shadow-md dark:shadow-gray-800"
+    class="flex fixed top-0 z-40 justify-center items-center w-full h-[60px] text-lg text-C_blue-700 dark:text-white bg-white dark:bg-black shadow-md dark:shadow-gray-800"
   >
     <div class="mr-36 w-[196px]">
       <router-link to="/">
