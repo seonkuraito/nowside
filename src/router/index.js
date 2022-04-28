@@ -92,7 +92,17 @@ const router = createRouter({
       props: (route) => ({ successId: route.params.successId }),
       component: () => import('../views/SuccessView.vue'),
     },
-  ]
+  ],
+  scrollBehavior (to, from, savedPosition) {
+    if (to.hash) {
+      return {
+        el: to.hash,
+        behavior: 'smooth',
+      }
+    } else {
+      return { top: 0 }
+    }
+  }
 })
 
 export default router

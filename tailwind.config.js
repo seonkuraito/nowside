@@ -69,9 +69,12 @@ module.exports = {
         bold: '700',
       },
       screens: {
-        'mobile': '320px',
-        'laptop': '768px',
-        'desktop': '1920px',
+        'limit': { 'min': '320px' },
+        // => @media (min-width: 320px) { ... }
+        'mobile': { 'min': '321px', 'max': '768px', },
+        // => @media (min-width: 321px and max-width: 768px) { ... }
+        'desktop': { 'min': '769px' },
+        // => @media (min-width: 769px) { ... }
       },
       borderRadius: {
         sm: '4px',
@@ -94,7 +97,7 @@ module.exports = {
   },
   plugins: [
     require("@tailwindcss/forms")({
-      strategy: 'class', // only generate classes
+      strategy: 'class',
     }),
   ],
 }

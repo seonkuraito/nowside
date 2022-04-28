@@ -15,7 +15,7 @@ export default {
     },
     // 發起專案 驗證
     createProjectToggle() {
-      this.$emit('create-projectT-toggle');
+      this.$emit('create-project-toggle');
     },
     // 登入視窗 顯示
     loginModalToggle() {

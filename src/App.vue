@@ -2,7 +2,6 @@
 import { S_login } from '@/http/api';
 import Header from '@/components/Header.vue';
 import Footer from '@/components/Footer.vue';
-// import button 
 
 export default {
   name: 'App',
@@ -95,7 +94,7 @@ export default {
 </script>
 
 <template>
-  <article :class="isDark ? 'dark' : ''">
+  <main :class="isDark ? 'dark' : ''">
     <NotificationGroup group="foo">
       <div
         class="flex fixed top-16 right-6 z-50 justify-end items-start pointer-events-none"
@@ -140,7 +139,7 @@ export default {
         </div>
       </div>
     </NotificationGroup>
-    <section
+    <article
       class="w-full h-full"
       :style="backgroundImage"
     >
@@ -247,12 +246,12 @@ export default {
       <Header
         @dark-mode-emit="darkModeToggle"
         @login-modal-emit="loginModalToggle"
-        @create-projectT-toggle="createProjectToggle"
+        @create-project-toggle="createProjectToggle"
       ></Header>
       <router-view></router-view>
       <Footer></Footer>
-    </section>
-  </article>
+    </article>
+  </main>
 </template>
 
 <style></style>

@@ -17,7 +17,7 @@ export default {
     // 更新專案狀態
     updateProjectState() {
       S_updateProjectState().then(res =>{
-        console.log('更新專案狀態', res.data);
+        console.log(`更新專案狀態：${res.data.status}`);
       })
       .catch(error => {
         console.log(error);
@@ -28,66 +28,86 @@ export default {
 </script>
 
 <template>
-  <article class="pt-[60px] w-full h-full">
+  <main class="pt-[60px] w-full h-full">
     <!-- banner -->
-    <section class="flex relative justify-center mx-auto min-w-[1920px] min-h-[732px] bg-white dark:bg-C_black">
+    <article class="flex relative justify-center bg-white dark:bg-C_black limit:w-full mobile:flex-col mobile:items-center mobile:w-full mobile:h-fit mobile:min-h-fit desktop:w-full desktop:min-h-[732px]">
       <!-- 藍色波浪 -->
       <img
         class="absolute bottom-0 left-0"
         src="../assets/banner-01.svg"
         alt="banner-01"
       >
-      <!-- 左半文字 + animation -->
-      <div class="flex z-10 flex-col items-end w-[960px]">
-        <h1 class="mt-40 mb-9 w-[646px] font-chillax text-[40px] font-medium text-C_blue-700 dark:text-C_blue-400">
-          Who we are?
-        </h1>
-        <h1 class="w-[646px] font-chillax text-[60px] font-medium text-C_blue-700 dark:text-C_blue-400">
-          We are<br><span class="text-C_green-500">Side Project Now.</span>
-        </h1>
-        <img
-          class="mr-8 w-[612px]"
-          src="../assets/banner-02.svg"
-          alt="banner-02"
-        >
-        <div class="-mt-12 animate-bounce">
-          <div class="mr-8 w-[48px] h-[48px] bg-C_green-700 rounded-full shadow-2xl"></div>
-        </div>
-      </div>
-      <!-- 右半圖片 + input -->
-      <div class="relative w-[960px]">
-        <img
-          class="w-[612px]"
-          src="../assets/banner-03.svg"
-          alt="banner-03"
-        >
-        <img
-          class="absolute right-0 bottom-0"
-          src="../assets/banner-04.svg"
-          alt="banner-04"
-        >
-        <form class=" relative ml-8 w-[636px] h-[62px] rounded-lg shadow-xl dark:shadow-none">
-          <input
-            id="signup"
-            v-model="NickName"
-            name="signup" 
-            type="text"
-            class="pl-8 w-full h-full text-lg font-medium text-C_gray-700 bg-C_blue-100 dark:bg-[#333333] rounded-lg focus:outline-none ring-1 focus:ring-0 dark:ring-0 ring-C_gray-300"
-            placeholder="請輸入暱稱"
+      <!-- 左半區塊 -->
+      <div class="z-10 w-1/2 mobile:w-full">
+        <!-- slogon + 球 -->
+        <section class="flex right-0 flex-col items-end">
+          <h1 class="mt-40 mb-9 w-[646px] font-chillax text-[40px] font-medium text-C_blue-700 dark:text-C_blue-400">
+            Who we are?
+          </h1>
+          <h1 class="w-[646px] font-chillax text-[60px] font-medium text-C_blue-700 dark:text-C_blue-400">
+            We are<br><span class="text-C_green-500">Side Project Now.</span>
+          </h1>
+          <img
+            class="mr-8 w-[612px]"
+            src="../assets/banner-02.svg"
+            alt="banner-02"
           >
-          <router-link
-            for="signup"
-            class="flex absolute top-0 right-0 justify-center items-center w-[192px] h-[62px] text-lg font-medium text-white bg-C_green-500 hover:bg-C_green-400 dark:bg-C_green-600 dark:hover:bg-C_green-500 rounded-lg"
-            :to="{ name: 'Signup', params: { NickName: NickName, } }"
-          >
-            立即註冊
-          </router-link>
-        </form>
+          <div class="-mt-12 animate-bounce">
+            <div class="mr-8 w-[48px] h-[48px] bg-C_green-700 rounded-full shadow-2xl"></div>
+          </div>
+        </section>
       </div>
-      <!-- 裝飾元素 -->
-    </section>
+      <!-- 右半區塊 -->
+      <div class="relative z-10 w-1/2 mobile:w-full">
+        <!-- 圖片 + input -->
+        <section class="relative left-0">
+          <img
+            class="w-[612px]"
+            src="../assets/banner-03.svg"
+            alt="banner-03"
+          >
+          <form class=" relative ml-8 w-[636px] h-[62px] rounded-lg shadow-xl dark:shadow-none">
+            <input
+              id="signup"
+              v-model="NickName"
+              name="signup" 
+              type="text"
+              class="pl-8 w-full h-full text-lg font-medium text-C_gray-700 bg-C_blue-100 dark:bg-[#333333] rounded-lg focus:outline-none ring-1 focus:ring-0 dark:ring-0 ring-C_gray-300"
+              placeholder="請輸入暱稱"
+            >
+            <router-link
+              for="signup"
+              class="flex absolute top-0 right-0 justify-center items-center w-[192px] h-[62px] text-lg font-medium text-white bg-C_green-500 hover:bg-C_green-400 dark:bg-C_green-600 dark:hover:bg-C_green-500 rounded-lg"
+              :to="{ name: 'Signup', params: { NickName: NickName, } }"
+            >
+              立即註冊
+            </router-link>
+          </form>
+        </section>
+        <!-- 裝飾元素 -->
+        <section class="absolute top-0 left-[660px] mobile:top-[-112px]">
+          <div class="flex relative flex-col w-[210px] h-fit">
+            <img
+              class="absolute top-[182px] animate__animated animate__infinite bounce__custom-P"
+              src="../assets/element-purple.svg"
+              alt="element-purple"
+            >
+            <img
+              class="absolute top-[542px] left-[163px] animate__animated animate__infinite bounce__custom-Y"
+              src="../assets/element-yellow.svg"
+              alt="element-yellow"
+            >
+            <img
+              class="absolute top-[592px] left-[44px] animate__animated animate__infinite bounce__custom-O"
+              src="../assets/element-orange.svg"
+              alt="element-orange"
+            >
+          </div>
+        </section>
+      </div>
+    </article>
     <!-- step -->
-    <section class="flex flex-col items-center py-20 mx-auto bg-white dark:bg-C_black">
+    <article class="flex flex-col items-center py-20 mx-auto bg-white dark:bg-C_black">
       <!-- 使用步驟 -->
       <h2 class="mb-6 font-chillax text-4xl font-medium text-C_blue-500 dark:text-C_blue-200">
         STEP <span class="font-sans text-xl font-medium text-C_blue-600 dark:text-C_blue-400">使用步驟</span>
@@ -141,9 +161,9 @@ export default {
           </p>
         </li>
       </ul>
-    </section>
+    </article>
     <!-- team -->
-    <section class="flex flex-col items-center pt-32 pb-40 mx-auto bg-gray-100 dark:bg-[#333333]">
+    <article class="flex flex-col items-center pt-32 pb-40 mx-auto bg-gray-100 dark:bg-[#333333]">
       <!-- 我們的團隊 -->
       <div class="flex flex-col items-center mb-40">
         <h2 class="pb-1 mb-14 w-fit text-[40px] font-bold text-center text-C_blue-600 dark:text-C_blue-200 border-4 border-x-transparent border-t-transparent border-b-C_green-500">
@@ -249,9 +269,9 @@ export default {
           </section>
         </li>
       </ul>
-    </section>
+    </article>
     <!-- feature -->
-    <section class="flex flex-col items-center pt-32 pb-16 mx-auto bg-white dark:bg-C_black">
+    <article class="flex flex-col items-center pt-32 pb-16 mx-auto bg-white dark:bg-C_black">
       <!-- 為什麼選擇我們 -->
       <div class="flex flex-col items-center mb-40">
         <h2 class="pb-1 mb-14 w-fit text-[40px] font-bold text-center text-C_blue-600 dark:text-C_blue-200 border-4 border-x-transparent border-t-transparent border-b-C_green-500">
@@ -314,11 +334,26 @@ export default {
           </div>
         </li>
       </ul>
-    </section>
-  </article>
+    </article>
+  </main>
 </template>
 
 <style>
+.bounce__custom-P {
+  animation: bounce;
+  --animate-duration: 24s;
+}
+
+.bounce__custom-Y {
+  animation: bounce;
+  --animate-duration: 12s;
+}
+
+.bounce__custom-O {
+  animation: bounce;
+  --animate-duration: 28s;
+}
+
 .hovereffect {
   width: 100%;
   height: 100%;
