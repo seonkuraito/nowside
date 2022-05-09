@@ -26,8 +26,9 @@ export default {
 </script>
 
 <template>
+  <!-- desktop -->
   <article
-    class="flex fixed top-0 z-40 justify-center items-center w-full h-[60px] text-lg text-C_blue-700 dark:text-white bg-white dark:bg-black shadow-md dark:shadow-gray-800"
+    class="fixed top-0 z-40 justify-center items-center w-full h-[60px] text-lg text-C_blue-700 dark:text-white bg-white dark:bg-black shadow-md dark:shadow-gray-800 mobile:hidden desktop:flex"
   >
     <div class="mr-36 w-[196px]">
       <router-link to="/">
@@ -89,5 +90,26 @@ export default {
         </button>
       </li>
     </ul>
+  </article>
+  <!-- mobile -->
+  <article class="fixed top-0 z-40 justify-between items-center w-full h-[60px] text-lg text-C_blue-700 dark:text-white bg-white dark:bg-black shadow-md dark:shadow-gray-800 mobile:flex desktop:hidden">
+    <!-- toggle -->
+    <div class="w-10 h-10 bg-white">
+      .
+    </div>
+    <!-- logo -->
+    <div class="w-[196px]">
+      <router-link to="/">
+        <img
+          src="../assets/logo-header.svg"
+          alt="logo-header"
+          class="mx-auto align-middle"
+        >
+      </router-link>
+    </div>
+    <!-- bugger -->
+    <div class="w-10 h-10 bg-white">
+      .
+    </div>
   </article>
 </template>
